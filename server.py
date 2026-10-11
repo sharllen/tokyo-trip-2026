@@ -542,9 +542,10 @@ app.mount("/", StaticFiles(directory=str(BASE_DIR), html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
+    port = int(os.environ.get("PORT", 8000))
     print("\n" + "=" * 60)
     print(" [OK] Elite Travel Planner Backend Gateway Started!")
-    print(" [URL] Please open in browser: http://127.0.0.1:8000")
+    print(f" [URL] Please open in browser: http://127.0.0.1:{port}")
     print(" [SECURITY] GEMINI_API_KEY is safely locked in backend .env")
     print("=" * 60 + "\n")
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
