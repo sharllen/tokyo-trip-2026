@@ -1,0 +1,945 @@
+{
+  "trip": {
+    "name": "2026 東京秋季 9 日深度自由行（橫濱・好市多・成田深度全客製）",
+    "destination": "日本 東京及近郊（上野・橫濱・幕張・成田）",
+    "startDate": "2026-10-19",
+    "endDate": "2026-10-27",
+    "flightDept": "聯合航空 UA838 | 高雄 KHH 08:00 -> 成田 NRT 13:15 (T1)",
+    "flightReturn": "聯合航空 UA837 | 成田 NRT 17:45 -> 高雄 KHH 21:15 (T1)",
+    "hotelName": "HOTEL MYSTAYS 上野 (HOTEL MYSTAYS Ueno)",
+    "hotelAddress": "東京都台東區東上野5-5-13 (+81 3-3842-2461)",
+    "members": [
+      "Sharllen Wang",
+      "Wang Hsiachun",
+      "同行家人(4人成行)"
+    ],
+    "mustGo": [
+      "晴空塔展望台",
+      "Workman晴空塔店",
+      "根室花丸/TORITON壽司",
+      "富士山河口湖",
+      "橫濱空中纜車與港灣夜景",
+      "鎌倉江之島",
+      "Sky Hop Bus雙層觀光巴士",
+      "箱根大湧谷與御殿場Outlet",
+      "Costco幕張店",
+      "成田山百年鰻魚飯",
+      "AEON MALL成田店",
+      "叙々苑 惠比壽花園廣場38F平日午餐",
+      "鍋ぞう壽喜燒放題",
+      "肉屋の台所燒肉放題"
+    ],
+    "mustAvoid": [
+      "跨區折返跑",
+      "最後一天趕不上機場",
+      "無電梯長階梯搬行李"
+    ]
+  },
+  "days": [
+    {
+      "dayNum": 1,
+      "date": "2026-10-19",
+      "theme": "Day 1 ｜ 抵達東京・入駐大本營上野・阿美橫丁散策",
+      "fatigueText": "約 7,500 步 (輕鬆熱身)",
+      "fatigueClass": "fatigue-low",
+      "isRainMode": false,
+      "logisticsTip": "UA838 航班預計 13:15 抵達 NRT T1，出關領行李約 14:15；搭乘京成 Skyliner 直達上野僅 41 分鐘；嚴格落實落地 2 小時後展開周邊輕鬆動線。",
+      "cultureTip": "日本電車內請保持手機靜音，搭乘電扶梯東京習慣靠左側站立。",
+      "safetyTip": "隨身攜帶護照正本以備免稅購物使用，注意末班 Skyliner 與 JR 班次。",
+      "sunnySpots": [
+        {
+          "id": "d1-s1",
+          "time": "13:15",
+          "period": "下午",
+          "title": "抵達成田國際機場第一航廈 (NRT T1)",
+          "transport": "搭乘 UA838 順利抵達，辦理入境與領取行李（預估 50 分鐘）",
+          "desc": "出關後於京成電鐵櫃台領取 Skyliner 車票與西瓜卡 (Suica)，搭乘直達特急列車奔向上野大本營。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "成田国際空港 第1ターミナル"
+        },
+        {
+          "id": "d1-s2",
+          "time": "15:15",
+          "period": "下午",
+          "title": "入住 HOTEL MYSTAYS 上野・卸下行李休憩",
+          "transport": "從京成上野站步行約 7~9 分鐘抵達飯店",
+          "desc": "辦理 Check-in 手續，將 9 天大件行李安置妥當，整理隨身小包展開第一天悠閒慢活行程。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "HOTEL MYSTAYS Ueno"
+        },
+        {
+          "id": "d1-s3",
+          "time": "16:30",
+          "period": "下午",
+          "title": "上野阿美橫丁 (Ameyoko) 活力市集採買",
+          "transport": "從飯店步行 6 分鐘直達阿美橫丁入口",
+          "desc": "漫步上野最熱鬧的高架橋下傳統老街，造訪「松本清」或「OS Drug」比價免稅藥妝，品嚐現切哈密瓜與水果串。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "アメヤ横丁"
+        },
+        {
+          "id": "d1-s4",
+          "time": "18:30",
+          "period": "晚上",
+          "title": "晚餐：上野道地拉麵名店（一蘭 / 麵屋武藏 武骨）",
+          "transport": "阿美橫丁商圈步行 3 分鐘",
+          "desc": "品嚐香濃豚骨拉麵或厚切叉燒沾麵，熱騰騰濃郁湯頭洗去搭機飛行疲勞。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "麺屋武蔵 武骨"
+        },
+        {
+          "id": "d1-s5",
+          "time": "20:00",
+          "period": "晚上",
+          "title": "多慶屋 (Takeya) 紫色大樓生活補給採購",
+          "transport": "從阿美橫丁步行約 5 分鐘抵達御徒町多慶屋",
+          "desc": "東京老字號免稅折扣商城，採買日本當季麝香葡萄、零食餅乾與飲用水，返回飯店舒適休息。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "多慶屋"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d1-r1",
+          "time": "16:30",
+          "period": "下午",
+          "title": "上野丸井百貨 (0101) & atre 上野商場 (全室內雨備)",
+          "transport": "上野站共構室內連通地下街直達",
+          "desc": "全室內連通商場，包含無印良品、LOFT 與各式日系雜貨，完全免受雨淋。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "上野マルイ"
+        }
+      ]
+    },
+    {
+      "dayNum": 2,
+      "date": "2026-10-20",
+      "theme": "Day 2 ｜ 晴空塔全日精華（途中早餐・Workman購物・13:30 Top of Tree午宴・16:00換票登頂・根室花丸/TORITON壽司）",
+      "fatigueText": "約 11,500 步 (商場室內好走)",
+      "fatigueClass": "fatigue-mid",
+      "isRainMode": false,
+      "logisticsTip": "【10/20 雙重預約鎖定】中午 13:30 準時入座 31F「天空LOUNGE TOP of TREE」高空景觀午宴（一休.com 預約）；下午 15:30 準備前往 4F 櫃台出示 QR Code 換票，16:00~16:30 入場登頂 350m+450m 展望台；晚間 19:00~19:30 享用 6F 超人氣排隊名店壽司（根室花丸 / TORITON），餐後直接返回上野飯店。",
+      "cultureTip": "晴空塔 6F 壽司名店（根室花丸 / TORITON）極受歡迎，建議下午逛街時或傍晚提前先至現場領取號碼牌。",
+      "safetyTip": "天望回廊玻璃地板拍照時請注意隨身貴重物品，遵守現場指引。",
+      "sunnySpots": [
+        {
+          "id": "d2-s1",
+          "time": "08:30",
+          "period": "上午",
+          "title": "上野至晴空塔途中人氣早餐：喫茶 友路有 (或 珈琲天國)",
+          "transport": "上野搭乘地鐵銀座線至淺草站步行 2 分鐘（或上野老舖喫茶）",
+          "desc": "【使用者指定早餐推薦】造訪東京懷舊昭和風名店「喫茶 友路有」，享用香脆厚切吐司、熱壓三明治、現煎培根荷包蛋與手沖熱咖啡，活力開啟美好早晨。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "純喫茶 友路有 浅草店"
+        },
+        {
+          "id": "d2-s2",
+          "time": "10:15",
+          "period": "上午",
+          "title": "晴空塔 Solamachi 3F：Workman Colors / Workman Girl 購物",
+          "transport": "從淺草搭東武晴空塔線或都營淺草線直達押上（晴空塔前）站",
+          "desc": "【使用者指定 Workman 購物】直奔東京晴空塔城 Solamachi 3 樓超夯的「Workman Colors」，大採購以極高 CP 值著稱的防潑水機能外套、輕量休閒褲、防風雨鞋與潮流戶外穿搭。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "Workman Colors 東京ソラマチ店"
+        },
+        {
+          "id": "d2-s3",
+          "time": "11:45",
+          "period": "上午",
+          "title": "晴空塔 Solamachi 潮流商場逛街採買 (午宴前散策)",
+          "transport": "Solamachi 商場室內各樓層散策",
+          "desc": "漫步商場各樓層，採購寶可夢中心 (Pokémon Center)、吉卜力橡子共和國與東京芭娜娜伴手禮，為 13:30 午宴熱身。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "東京ソラマチ"
+        },
+        {
+          "id": "d2-s4",
+          "time": "13:30",
+          "period": "中午",
+          "title": "【已預約午宴】天空LOUNGE TOP of TREE／東京ソラマチ31F",
+          "transport": "搭乘 Solamachi 12 號高層專用景觀電梯直達 31 樓",
+          "desc": "【已預約午宴・一休.com 確認單】準時 13:30 入座東京晴空塔 31 樓「天空LOUNGE TOP of TREE」（預約姓名：Sharllen Wang / りしゅくけん 様，4 位）。在無敵高空景觀座席前直面雄偉晴空塔鋼骨架構與東京都心全景，享用三層精緻法式/日式高空午宴料理！",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "天空 LOUNGE TOP of TREE"
+        },
+        {
+          "id": "d2-s5",
+          "time": "15:30",
+          "period": "下午",
+          "title": "前往晴空塔 4 樓櫃台出示 QR Code 換票準備登頂",
+          "transport": "搭電梯返回 4 樓晴空塔售票與驗票入口大廳",
+          "desc": "【使用者指定 3:30 準備換票】準時抵達 4 樓櫃台出示購票憑證 QR Code（訂單編號 16826030743493，4 位成人套票，預約 16:00~16:30 入場）。感應過閘搭乘高速天望電梯直達 350m 天望甲板與 450m 天望回廊，在晴空下俯瞰東京灣與富士山夕陽！",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "東京スカイツリー"
+        },
+        {
+          "id": "d2-s6",
+          "time": "16:00",
+          "period": "下午",
+          "title": "東京晴空塔展望台登頂巡禮 (350m 天望甲板 + 450m 天望回廊)",
+          "transport": "高速電梯直達展望台",
+          "desc": "【已購票 16:00 入場】登上世界最高自立式電波塔，漫步於 450 公尺斜坡回廊，靜靜欣賞關東平原從金黃夕陽過渡到百萬璀璨夜景的壯麗天際線。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "東京スカイツリー 展望デッキ"
+        },
+        {
+          "id": "d2-s7",
+          "time": "19:00",
+          "period": "晚上",
+          "title": "超人氣排隊名店壽司晚餐：北海道根室花丸 (或 TORITON トリトン)",
+          "transport": "晴空塔 Solamachi 6F 美食餐廳街",
+          "desc": "【使用者指定 19:00~19:30 壽司晚餐】造訪全東京一致狂推的殿堂級迴轉壽司——「回転寿司 根室花まる」或「回転寿し トリトン」！大啖產地直送厚切干貝、牡丹蝦、生海膽與極鮮鮪魚腹壽司！",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "回転寿司 根室花まる 東京ソラマチ店"
+        },
+        {
+          "id": "d2-s8",
+          "time": "20:45",
+          "period": "晚上",
+          "title": "用餐後直接搭車返回上野飯店休息",
+          "transport": "從押上站搭乘都營淺草線至淺草轉銀座線，或搭東武線直達上野，約 15 分鐘",
+          "desc": "【使用者指定用餐後直接回飯店】不折返、不繞路，直接返回 HOTEL MYSTAYS 上野，安頓戰利品並充分享受充足睡眠。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "HOTEL MYSTAYS Ueno"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d2-r1",
+          "time": "13:30",
+          "period": "下午",
+          "title": "墨田水族館 (Sumida Aquarium) 全室內企鵝水池",
+          "transport": "晴空塔 Solamachi 5 樓直通",
+          "desc": "完全室內現代水族館，欣賞可愛麥哲倫企鵝水池、水母萬花筒與江戶金魚展，風雨無阻。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "すみだ水族館"
+        }
+      ]
+    },
+    {
+      "dayNum": 3,
+      "date": "2026-10-21",
+      "theme": "Day 3 ｜ 富士山河口湖絕景一日遊（專車八重洲07:40/新宿08:30・忍野八海・大石公園・打卡超商・新倉山淺間公園）",
+      "fatigueText": "約 11,000 步 (專車接駁，新倉山登階)",
+      "fatigueClass": "fatigue-mid",
+      "isRainMode": false,
+      "logisticsTip": "07:40 於「東京八重洲地下街 26 號地上出口」集合，07:50 專車準時出發（或 08:30 新宿 i-Land Tower LOVE 標誌發車）。從上野搭 JR 僅 5 分鐘直達東京站，交通極度順路！",
+      "cultureTip": "忍野八海為日本名水百選與國家天然紀念物，泉水甘甜清澈；新倉山淺間公園需登 398 階梯，請著好走防滑球鞋。",
+      "safetyTip": "富士山麓秋季氣溫較東京市區低 5~7 度，山區風大請務必攜帶防風禦寒外套。",
+      "sunnySpots": [
+        {
+          "id": "d3-s1",
+          "time": "07:40",
+          "period": "上午",
+          "title": "集合出發：東京八重洲地下街 26 號地上出口 (或 08:30 新宿)",
+          "transport": "從上野站搭乘 JR 山手線或上野東京線 5 分鐘抵達東京站，步行至八重洲地下街 26 號出口",
+          "desc": "07:40 準時報到集合，專車於 07:50 出發；（若選新宿集合則為 08:30 於新宿 i-Land Tower LOVE 標誌出發）。中文隨車導覽專車直奔河口湖。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "八重洲地下街 26番出口"
+        },
+        {
+          "id": "d3-s2",
+          "time": "10:30",
+          "period": "上午",
+          "title": "忍野八海（停留 50 分鐘・名水百選湧泉群）",
+          "transport": "專車直達停車場，步行漫步參觀",
+          "desc": "富士山融雪長年過濾形成的八座清澈湧泉池，漫步於茅草屋與田園之間，品嚐甘甜富士湧泉水與現烤艾草餅。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "忍野八海"
+        },
+        {
+          "id": "d3-s3",
+          "time": "12:00",
+          "period": "中午",
+          "title": "河口湖大石公園（停留 30 分鐘・湖畔花海與逆富士）",
+          "transport": "專車接駁約 15 分鐘至河口湖北岸",
+          "desc": "漫步大石公園湖畔，欣賞秋季豔紅圓滾滾的掃帚草（波波草）與四季花海，直面河口湖波光倒映壯麗富士山。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "大石公園"
+        },
+        {
+          "id": "d3-s4",
+          "time": "12:40",
+          "period": "下午",
+          "title": "河口湖 富士山亭 或 Craft Park（停留 70 分鐘・午餐與湖畔散策）",
+          "transport": "專車接駁約 8 分鐘",
+          "desc": "於湖畔景觀商場享用在地名物午餐（熱騰騰山梨餺飥麵定食或天婦羅），或於河口湖畔漫步吹風採購紀念品。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "河口湖クラフトパーク"
+        },
+        {
+          "id": "d3-s5",
+          "time": "14:10",
+          "period": "下午",
+          "title": "河口湖打卡便利商店（停留 20 分鐘・IG爆紅富士山同框）",
+          "transport": "專車接駁約 10 分鐘",
+          "desc": "造訪 IG 爆紅的經典拍照點，在安全指定視角拍攝日系 LAWSON 招牌與背後雄偉富士山完美重疊的超人氣畫面。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "ローソン 河口湖駅前店"
+        },
+        {
+          "id": "d3-s6",
+          "time": "14:50",
+          "period": "下午",
+          "title": "新倉山淺間公園（停留 70 分鐘・五重塔忠靈塔富士絕景）",
+          "transport": "專車前往富士吉田停車場，步行登階",
+          "desc": "登上 398 階梯來到觀景台，飽覽代表日本精神的硃紅五重塔與雄偉雪白富士山同框之世界級明信片景致。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "新倉山浅間公園"
+        },
+        {
+          "id": "d3-s7",
+          "time": "18:10",
+          "period": "晚上",
+          "title": "專車返抵新宿車站・原地解散返回上野",
+          "transport": "專車走中央道返回新宿，搭乘 JR 中央快速線 14 分鐘至東京站，轉 JR 山手線直達上野",
+          "desc": "行程圓滿結束於新宿解散。搭車返回上野大本營，在飯店周邊享用居酒屋料理或熱湯拉麵放鬆休息。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "新宿駅"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d3-r1",
+          "time": "12:40",
+          "period": "下午",
+          "title": "河口湖 Craft Park 室內玻璃與陶藝工坊 (雨備首選)",
+          "transport": "全室內工坊直達，完全免受風雨影響",
+          "desc": "全室內體驗，可動手製作專屬紀念玻璃噴砂杯或富士山彩繪，並於室內景觀餐廳舒適享用在地熱食午餐。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "河口湖クラフトパーク"
+        }
+      ]
+    },
+    {
+      "dayNum": 4,
+      "date": "2026-10-22",
+      "theme": "Day 4 ｜ 叙々苑 38F 高空平日超值午宴 ＆ 橫濱浪漫港都一日遊（AIR CABIN纜車・紅磚倉庫・港灣夜景）",
+      "fatigueText": "約 11,500 步 (海風漫步舒服)",
+      "fatigueClass": "fatigue-mid",
+      "isRainMode": false,
+      "logisticsTip": "【平日敘敘苑高樓層分店】中午 11:30 安排於「叙々苑 惠比壽花園廣場店 38F (Top of Yebisu)」享用超值平日午間燒肉套餐（避開澀谷人潮，38 樓高空直面東京鐵塔）！用餐後從惠比壽搭乘湘南新宿線僅 24 分鐘直達橫濱櫻木町，下午漫步空中纜車、紅磚倉庫與港灣夜景，動線極順暢！",
+      "cultureTip": "橫濱中華街為日本最大中華商圈，品嚐生煎包與小籠包時請於店家內用區或指定區域食用，勿邊走邊滴汁。",
+      "safetyTip": "海濱地區傍晚海風較強，建議攜帶防風輕薄外套。",
+      "sunnySpots": [
+        {
+          "id": "d4-s1",
+          "time": "10:30",
+          "period": "上午",
+          "title": "上野出發：搭乘 JR 山手線前往惠比壽花園廣場",
+          "transport": "上野搭乘山手線或日比谷線直達惠比壽站，出站走電動步道 (Yebisu Skywalk) 5 分鐘直通",
+          "desc": "輕鬆穿過惠比壽花園廣場紅磚廣場，搭乘高層專用電梯直上 38 樓景觀餐廳層。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "恵比寿ガーデンプレイス"
+        },
+        {
+          "id": "d4-s2",
+          "time": "11:30",
+          "period": "中午",
+          "title": "【高樓層平日超值午宴】叙々苑 恵比寿ガーデンプレイス店 (38F)",
+          "transport": "惠比壽花園廣場塔 38 樓 (Top of Yebisu)",
+          "desc": "【使用者指定高樓層非澀谷分店】造訪位於 38 樓高空的「叙々苑」！平日限定超值午間燒肉套餐（約 ¥3,200~¥4,200），包含特選牛五花/牛里肌、知名特製敘敘苑沙拉、泡菜拼盤、韓式小菜、米飯、湯品與甜點飲料。坐擁 38 樓大片落地窗直面東京都心與東京鐵塔壯闊天際線，優雅安靜免排隊！",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "叙々苑 恵比寿ガーデンプレイス店"
+        },
+        {
+          "id": "d4-s3",
+          "time": "13:00",
+          "period": "下午",
+          "title": "惠比壽直通橫濱：搭乘 JR 湘南新宿線 (24 分鐘直達)",
+          "transport": "從 JR 惠比壽站搭乘湘南新宿線快速電車直達橫濱站，轉根岸線至櫻木町",
+          "desc": "高鐵級順向銜接，完全不繞路直奔海港城市橫濱，一出櫻木町站即可看到未來感港灣與空中纜車。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "桜木町駅"
+        },
+        {
+          "id": "d4-s4",
+          "time": "14:00",
+          "period": "下午",
+          "title": "橫濱空中纜車 (YOKOHAMA AIR CABIN) 凌空飛越運河",
+          "transport": "櫻木町站前纜車站搭乘至運河公園站 (約 5 分鐘)",
+          "desc": "日本首座都市型常設空中纜車！全景透明車廂中 360 度俯瞰港未來 21、帆船日本丸與 Cosmo Clock 巨型摩天輪。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "YOKOHAMA AIR CABIN"
+        },
+        {
+          "id": "d4-s5",
+          "time": "14:45",
+          "period": "下午",
+          "title": "橫濱紅磚倉庫 (赤レンガ倉庫) 歷史風華與文創散策",
+          "transport": "從運河公園步行 4 分鐘抵達",
+          "desc": "百年前明治海關倉庫化身文創特區，漫步紅磚拱廊採買橫濱限定雜貨，在海景廣場吹風拍照。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "横浜赤レンガ倉庫"
+        },
+        {
+          "id": "d4-s6",
+          "time": "16:30",
+          "period": "傍晚",
+          "title": "橫濱地標塔 69F 空中花園 (Sky Garden) 港灣絕美夜景",
+          "transport": "步行至地標塔搭乘日本最高速電梯直達 69 樓觀景台",
+          "desc": "登上 69 樓觀景台，飽覽全日本評選最美港灣日落與摩天大樓華燈初上的百萬魔幻夜景。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "横浜ランドマークタワー スカイガーデン"
+        },
+        {
+          "id": "d4-s7",
+          "time": "18:30",
+          "period": "晚上",
+          "title": "晚餐：橫濱中華街點心小吃巡禮（王府井生煎包 / 廣東燒賣）",
+          "transport": "漫步至中華街",
+          "desc": "穿過熱鬧的善鄰門與牌樓，品嚐知名爆漿生煎包與各式港式小吃點心。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "横浜中華街"
+        },
+        {
+          "id": "d4-s8",
+          "time": "20:30",
+          "period": "晚上",
+          "title": "搭乘 JR 東海道線直達返回上野大本營",
+          "transport": "從橫濱站搭乘上野東京線快速直達上野 (32 分鐘)",
+          "desc": "舒適直達不折返，返抵上野飯店休息，結束豐富充實的一天。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "HOTEL MYSTAYS Ueno"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d4-r1",
+          "time": "11:00",
+          "period": "上午",
+          "title": "橫濱日清合味道泡麵博物館 (Cup Noodles Museum) 全室內體驗",
+          "transport": "運河公園旁步行 2 分鐘，全室內展館",
+          "desc": "全室內場館，親手彩繪專屬泡麵杯、自選湯頭與配料封膜製作全世界獨一無二的專屬泡麵，趣味滿分。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "カップヌードルミュージアム 横浜"
+        }
+      ]
+    },
+    {
+      "dayNum": 5,
+      "date": "2026-10-23",
+      "theme": "Day 5 ｜ 湘南海岸古都巡禮・鎌倉江之島一日遊（大佛・鶴岡八幡宮・江之電・海景日落）",
+      "fatigueText": "約 12,000 步 (古都階梯散策)",
+      "fatigueClass": "fatigue-high",
+      "isRainMode": false,
+      "logisticsTip": "搭乘一日遊專車前往古都鎌倉。造訪鶴岡八幡宮、小町通老街、高德院大佛、搭乘江之電欣賞湘南海岸線平交道與江之島。",
+      "cultureTip": "鎌倉大佛內部若開放參觀可自費 50 日圓進入胎內體驗；小町通店家下午 17:00 前多半打烊。",
+      "safetyTip": "江之電鎌倉高校前平交道拍照時嚴禁走入車道或鐵軌，注意往來車輛安全。",
+      "sunnySpots": [
+        {
+          "id": "d5-s1",
+          "time": "08:30",
+          "period": "上午",
+          "title": "專車集合出發：前往古都鎌倉",
+          "transport": "專車接駁走首都高速公路與橫濱橫須賀道路前往鎌倉",
+          "desc": "出發前往擁有近千年武家歷史的相模灣古都鎌倉，沿途聆聽專業隨車中文導覽介紹幕府歷史。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "鎌倉市"
+        },
+        {
+          "id": "d5-s2",
+          "time": "10:00",
+          "period": "上午",
+          "title": "鶴岡八幡宮 & 小町通歷史老街漫步",
+          "transport": "專車停靠鎌倉車站周邊，步行穿過若宮大路",
+          "desc": "參拜源賴朝建立的鎌倉精神地標鶴岡八幡宮，漫步小町通商店街品嚐現烤仙貝、大佛燒、吻仔魚天婦羅炸餅與濃郁抹茶冰淇淋。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "鶴岡八幡宮"
+        },
+        {
+          "id": "d5-s3",
+          "time": "12:00",
+          "period": "中午",
+          "title": "高德院鎌倉大佛 & 長谷寺觀音庭園",
+          "transport": "專車接駁約 10 分鐘至長谷",
+          "desc": "瞻仰淨土宗名剎高德院露天青銅釋迦牟尼大佛國寶，順訪長谷寺古色古香迴遊式庭園與眺望相模灣之見晴台。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "鎌倉大仏殿高徳院"
+        },
+        {
+          "id": "d5-s4",
+          "time": "14:00",
+          "period": "下午",
+          "title": "搭乘復古江之電・鎌倉高校前平交道青春朝聖",
+          "transport": "搭乘綠色經典江之島電鐵體驗",
+          "desc": "搭乘百年歷史江之電穿梭在民宅與海岸之間，於「鎌倉高校前站」平交道定格《灌籃高手》動畫主題曲蔚藍湘南海岸經典畫面。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "鎌倉高校前駅"
+        },
+        {
+          "id": "d5-s5",
+          "time": "15:30",
+          "period": "下午",
+          "title": "江之島海景漫步・江島神社祈福夕陽",
+          "transport": "步行穿過江之島弁天橋",
+          "desc": "走上海中陸連島江之島，漫步青銅鳥居商店街，品嚐現壓大章魚仙貝，登上江島神社欣賞落入相模灣的金色夕陽。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "江の島"
+        },
+        {
+          "id": "d5-s6",
+          "time": "18:30",
+          "period": "晚上",
+          "title": "專車返回東京・回上野享用在地燒肉料理",
+          "transport": "專車返回東京市區，回上野飯店",
+          "desc": "結束充實古都海岸一日遊，回到上野享用炭火燒肉定食或日式定食，洗去一天步行疲累。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "HOTEL MYSTAYS Ueno"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d5-r1",
+          "time": "14:00",
+          "period": "下午",
+          "title": "新江之島水族館 (相模灣大水槽與水母夢幻廳)",
+          "transport": "江之島海岸旁全室內場館",
+          "desc": "全室內海洋展館，欣賞相模灣 2 萬尾銀色沙丁魚群迴游風暴與夢幻發光水母穹頂展。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "新江ノ島水族館"
+        }
+      ]
+    },
+    {
+      "dayNum": 6,
+      "date": "2026-10-24",
+      "theme": "Day 6 ｜ 尊爵敞篷觀光巴士一日遊 ＆ 鍋ぞう (Nabezo) 壽喜燒名店放題晚餐",
+      "fatigueText": "約 7,500 步 (巴士敞篷免走路超舒服)",
+      "fatigueClass": "fatigue-low",
+      "isRainMode": false,
+      "logisticsTip": "【4000日圓內放題餐廳 1】晚餐安排東京評價極高的「鍋ぞう (Nabezo) 淺草雷門店 / 上野店」！精選國產牛與三元豚壽喜燒 100 分鐘吃到飽，每人僅約 ¥2,800~¥3,400（完全在 4000 日圓預算內！），嚴選生雞蛋、產地直送野菜吧與冰淇淋無限享用，白天搭雙層開頂觀光巴士無負擔，夜晚大飽口福！",
+      "cultureTip": "搭乘開頂雙層巴士時請全程繫妥安全帶，車輛行駛中勿站立走動；隨車備有多國語言耳機導覽系統。",
+      "safetyTip": "敞篷頂層風大，秋冬季節請配戴防風圍巾與保暖外套。",
+      "sunnySpots": [
+        {
+          "id": "d6-s1",
+          "time": "09:30",
+          "period": "上午",
+          "title": "東京站丸之內乘車處：搭乘 Sky Hop Bus 雙層開頂露天觀光巴士",
+          "transport": "上野搭 JR 5 分鐘直達東京站，步行至丸之內三菱大廈前巴士站",
+          "desc": "出示憑證登上紅色雙層露天敞篷觀光巴士（Sky Hop Bus），以 3.8 公尺的高空視角穿梭皇居護城河楠正成銅像與丸之內摩天紅磚林蔭大道。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "丸の内三菱ビル"
+        },
+        {
+          "id": "d6-s2",
+          "time": "10:30",
+          "period": "上午",
+          "title": "東京鐵塔路線巡遊：仰望紅色經典地標鐵塔",
+          "transport": "觀光巴士紅線/藍線巡遊",
+          "desc": "巴士緩緩行駛於芝公園旁，在毫無玻璃遮蔽的露天甲板上，以絕佳廣角視角仰望壯麗的紅色東京鐵塔鋼骨結構，微風吹拂，拍照視野極其開闊。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "東京タワー"
+        },
+        {
+          "id": "d6-s3",
+          "time": "12:00",
+          "period": "中午",
+          "title": "築地場外市場：憑 City Pass 兌換「築地丸武」熱騰騰玉子燒",
+          "transport": "觀光巴士於築地站停靠下車步行 2 分鐘",
+          "desc": "出示套票免費兌換百年老舖「築地丸武」現煎香甜金黃玉子燒！中午在大街上品嚐鮮甜黑毛和牛串燒、炙燒海膽干貝與海鮮丼。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "つきじ丸武 本店"
+        },
+        {
+          "id": "d6-s4",
+          "time": "14:00",
+          "period": "下午",
+          "title": "銀座漫步 & 日本酒情報館品飲清酒 (City Pass 權益體驗)",
+          "transport": "從築地搭觀光巴士至銀座站，步行至日本酒情報館",
+          "desc": "參觀全日本酒類情報館，憑套票體驗日本各地頂級純米大吟釀與清酒品飲組，認識吟釀造香氣與各縣米種風土特色。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "日本の酒情報館"
+        },
+        {
+          "id": "d6-s5",
+          "time": "16:00",
+          "period": "下午",
+          "title": "搭乘觀光巴士橫越彩虹大橋・台場海濱自由女神像",
+          "transport": "搭乘觀光巴士台場路線直接橫跨彩虹大橋",
+          "desc": "巴士在露天甲板上駛上彩虹大橋，遠眺東京灣與富士山剪影，行經台場海濱公園與縮小版自由女神像，景色壯闊迷人。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "お台場海浜公園"
+        },
+        {
+          "id": "d6-s6",
+          "time": "18:00",
+          "period": "晚上",
+          "title": "東京巨蛋城娛樂 (憑 City Pass 搭乘 Big-O 露天中空摩天輪)",
+          "transport": "搭乘觀光巴士返回市區轉地鐵或 JR 直達後樂園",
+          "desc": "免費兌換搭乘世界首創中空無軸摩天輪 Big-O，在高空俯瞰東京巨蛋璀璨夜景與雲霄飛車穿梭刺激畫面。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "東京ドームシティアトラクションズ ビッグ・オー"
+        },
+        {
+          "id": "d6-s7",
+          "time": "19:30",
+          "period": "晚上",
+          "title": "【4000円內放題第1間】鍋ぞう (Nabezo) 壽喜燒・涮涮鍋 100 分鐘吃到飽",
+          "transport": "搭乘 JR 中央總武線僅 2 站回秋葉原轉上野 (約 10 分鐘)",
+          "desc": "【使用者指定 4000 円以內放題】造訪深受在地人好評的知名名店「鍋ぞう (Nabezo)」！精選優質牛肉、三元豚肉質鮮嫩，搭配濃郁壽喜燒甘甜醬汁與有機生雞蛋無限沾取。超過 20 種新鮮產地直送蔬菜、手工豆腐、菇類與咖哩飯、霜淇淋任吃，每人僅約 ¥2,800~¥3,400，CP 值破表！",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "鍋ぞう 浅草雷門店"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d6-r1",
+          "time": "14:00",
+          "period": "下午",
+          "title": "銀座 Ginza Six 室內藝術中庭 & 日本酒情報館",
+          "transport": "全室內商場與展館直達",
+          "desc": "若遇天候不佳，觀光巴士會換為室內遮棚車頂；銀座商場全室內漫步，安全乾燥。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "GINZA SIX"
+        }
+      ]
+    },
+    {
+      "dayNum": 7,
+      "date": "2026-10-25",
+      "theme": "Day 7 ｜ 箱根大湧谷火山・蘆之湖海盜船神社・御殿場 OUTLETS 旗艦購物日",
+      "fatigueText": "約 11,000 步 (Outlet 大採購)",
+      "fatigueClass": "fatigue-mid",
+      "isRainMode": false,
+      "logisticsTip": "搭乘專車前往箱根國立公園。造訪大湧谷地熱、蘆之湖水上鳥居，下午前往御殿場 Premium Outlets 享受富士山全景國際精品大採購。",
+      "cultureTip": "大湧谷火山黑玉子傳說吃一顆可延年益壽 7 年；因含有地熱硫磺蒸氣，患有呼吸道疾病者請避免靠近噴氣口。",
+      "safetyTip": "御殿場 Outlet 佔地廣大，抵達時請先確認專車回程集合地點與集合時間。",
+      "sunnySpots": [
+        {
+          "id": "d7-s1",
+          "time": "08:00",
+          "period": "上午",
+          "title": "專車出發：直奔富士箱根伊豆國立公園",
+          "transport": "專車行駛東名高速公路前往箱根",
+          "desc": "專車接送免除多次換乘登山鐵道與纜車的繁瑣，直抵箱根火山心臟地帶。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "箱根町"
+        },
+        {
+          "id": "d7-s2",
+          "time": "10:30",
+          "period": "上午",
+          "title": "箱根大湧谷：地熱火山白煙・品嚐名物黑玉子",
+          "transport": "專車直達大湧谷停車場",
+          "desc": "置身於白煙蒸騰的大湧谷火山口，欣賞荒涼壯麗的硫磺地熱奇景，品嚐以天然泉水煮沸的名物黑雞蛋（黑玉子）。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "大涌谷"
+        },
+        {
+          "id": "d7-s3",
+          "time": "12:00",
+          "period": "中午",
+          "title": "蘆之湖畔・箱根神社「平和之鳥居」水上絕景",
+          "transport": "專車接駁至蘆之湖南岸元箱根港",
+          "desc": "參拜被巨木古杉環抱的古老箱根神社，漫步湖濱步道，拍攝巍然屹立於清澈湖水之中的硃紅水上鳥居。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "箱根神社 平和の鳥居"
+        },
+        {
+          "id": "d7-s4",
+          "time": "13:30",
+          "period": "下午",
+          "title": "御殿場 Premium Outlets：國際精品與日系名牌大採購",
+          "transport": "專車接駁約 30 分鐘直達御殿場 Outlet",
+          "desc": "日本規模最宏偉的旗艦 Outlet，直面雄偉富士山全景！擁有超過 290 家國際精品品牌、戶外休閒與運動用品，享免稅折扣大肆血拚。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "御殿場プレミアム・アウトレット"
+        },
+        {
+          "id": "d7-s5",
+          "time": "15:30",
+          "period": "下午",
+          "title": "Outlet 美食廣場享用精緻下午茶與點心",
+          "transport": "Outlet 內部美食廣場",
+          "desc": "品嚐山麓在地鮮乳可麗餅、名物炭火牛排或靜岡綠茶甜點，坐在景觀長椅上欣賞富士山伴隨夕陽餘暉。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "御殿場プレミアム・アウトレット フードコート"
+        },
+        {
+          "id": "d7-s6",
+          "time": "18:00",
+          "period": "晚上",
+          "title": "專車啟程返回東京・抵達新宿轉車回上野",
+          "transport": "專車行駛東名高速公路返回新宿，轉 JR 山手線回上野",
+          "desc": "滿載精品戰利品舒適搭車，回到上野飯店整理收穫，好好休息。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "HOTEL MYSTAYS Ueno"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d7-r1",
+          "time": "13:30",
+          "period": "下午",
+          "title": "御殿場 Premium Outlets 全長廊遮雨棚精品採購",
+          "transport": "商場全區配備大型防雨長廊與室內商場",
+          "desc": "商場店舖皆以加寬遮雨廊道相連，雨天依舊能舒適在各品牌精品店間穿梭血拚。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "御殿場プレミアム・アウトレット"
+        }
+      ]
+    },
+    {
+      "dayNum": 8,
+      "date": "2026-10-26",
+      "theme": "Day 8 ｜ Costco幕張旗艦店(出站2分) ＆ 肉屋の台所 和牛燒肉放題慶祝之夜",
+      "fatigueText": "約 9,500 步 (推車採買好推輕鬆)",
+      "fatigueClass": "fatigue-low",
+      "isRainMode": false,
+      "logisticsTip": "【出站步行 2 分鐘直達好市多 + 4000円內放題餐廳 2】JR 京葉線「幕張豐砂站」出站步行 2 分鐘直達 Costco 幕張店正門（完全免搭公車！）；下午回上野飯店放下滿滿戰利品後，晚餐安排上野站旁超人氣「肉屋の台所 上野公園前店」燒肉放題（每人約 ¥3,500，完全在 4000 日圓預算內），享用牛五花、大判橫膈膜與豐富燒肉放題！",
+      "cultureTip": "日本 Costco 結帳需出示有效會員卡（台灣好市多會員卡全球通用有效），支援萬事達卡 (Mastercard) 信用卡或現金結帳。",
+      "safetyTip": "大包裝戰利品回程建議多利用大容量折疊購物袋或推車，搭乘 JR 京葉線快速直達東京站轉上野，避免上下班尖峰擠車。",
+      "sunnySpots": [
+        {
+          "id": "d8-s1",
+          "time": "09:30",
+          "period": "上午",
+          "title": "上野出發：搭乘電車快速直達 JR「幕張豐砂站」",
+          "transport": "上野搭日比谷線至八丁堀站，同站轉乘 JR 京葉線直達「幕張豐砂站」(約 38 分鐘)",
+          "desc": "一班直達千葉最新車站「幕張豐砂站」，新車站寬敞平整且配備大型電梯，非常適合推著折疊購物推車或攜帶大容量行李箱前往採購。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "幕張豊砂駅"
+        },
+        {
+          "id": "d8-s2",
+          "time": "10:30",
+          "period": "上午",
+          "title": "好市多幕張店 (Costco Wholesale Makuhari) 出站步行 2 分鐘直達！",
+          "transport": "JR 幕張豐砂站出站步行 2 分鐘過馬路即達 Costco 正門（完全不用搭公車！）",
+          "desc": "【出站步行 2 分鐘直達】出站過馬路立即抵達關東最具代表性的雙層大型 Costco 旗艦店！採買日本限定大包裝零食、干貝起司條、日本限定維他命保健品、保養品與限定伴手禮，大享高額退稅與超值好康。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "コストコホールセール 幕張倉庫店"
+        },
+        {
+          "id": "d8-s3",
+          "time": "12:30",
+          "period": "中午",
+          "title": "Costco 美食廣場或步行至相鄰 AEON 幕張旗艦館享用午餐",
+          "transport": "Costco 內部或過天橋至 AEON MALL 幕張新都心",
+          "desc": "品嚐經典好市多超高 CP 值大披薩、熱騰騰牛肉捲、熱狗喝到飽汽水，或至相鄰的永旺夢樂城旗艦館美食街品嚐日式定食。",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "コストコホールセール 幕張 フードコート"
+        },
+        {
+          "id": "d8-s4",
+          "time": "14:00",
+          "period": "下午",
+          "title": "AEON MALL 幕張新都心 & 幕張豐砂站前生活漫步",
+          "transport": "商場室內連通步道散策",
+          "desc": "逛逛全日本佔地第三大的 AEON 夢樂城 Grand Mall，採購日系生活雜貨、文具與行李打包用品，輕鬆悠閒。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "イオンモール幕張新都心"
+        },
+        {
+          "id": "d8-s5",
+          "time": "17:00",
+          "period": "傍晚",
+          "title": "從「幕張豐砂站」搭乘 JR 京葉線直達東京站・回上野放戰利品",
+          "transport": "從幕張豐砂站搭 JR 京葉線直達東京站，轉 JR 山手線 5 分鐘回上野 (約 45 分鐘)",
+          "desc": "大包小包戰利品從幕張豐砂站直接搭乘電車回上野 HOTEL MYSTAYS，卸下戰利品放進房間，稍作梳洗休息。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "HOTEL MYSTAYS Ueno"
+        },
+        {
+          "id": "d8-s6",
+          "time": "19:00",
+          "period": "晚上",
+          "title": "【4000円內放題第2間】肉屋の台所 (Nikuya no Daidokoro) 上野店 燒肉放題",
+          "transport": "上野站周邊步行 5 分鐘",
+          "desc": "【使用者指定 4000 円以內放題】在東京最後一個夜晚，造訪上野老字號肉舖直營「肉屋の台所 上野公園前店」！超值燒肉放題套餐每人僅約 ¥3,300~¥3,800（完全在 4000 日圓預算內），盡情享用牛五花、牛里肌、特選大判橫膈膜、壺漬牛排、厚切豬五花、石鍋拌飯與沙拉吧無限續，為旅程畫下美味最高潮！",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "肉屋の台所 上野公園前店"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d8-r1",
+          "time": "10:30",
+          "period": "上午",
+          "title": "Costco 雙層室內賣場 + AEON MALL 幕張全天候室內商場",
+          "transport": "大型室內商場直通",
+          "desc": "賣場全室內空調且具備大遮雨棚裝卸區，完全免受戶外天氣或雨水影響。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "イオンモール幕張新都心"
+        }
+      ]
+    },
+    {
+      "dayNum": 9,
+      "date": "2026-10-27",
+      "theme": "Day 9 ｜ 成田市半日漫遊・車站行李寄存・百年鰻魚飯名店・AEON 採購・提前3.5H順暢返國",
+      "fatigueText": "約 8,000 步 (從容悠閒機場收攏)",
+      "fatigueClass": "fatigue-low",
+      "isRainMode": false,
+      "logisticsTip": "航班：回程 UA837 成田 T1 17:45 起飛，國際線嚴格於 14:15（提前 3.5 小時）抵達機場！\n08:30 上野退房搭特急直達「JR成田站 / 京成成田站」；09:30 於成田車站寄放大件行李；漫步成田山新勝寺與表參道老街；11:30 享用成田必吃炭火現烤鰻魚飯（川豐本店 / 駿河屋）；12:45 接駁車至 AEON MALL Narita 採購伴手禮；14:00 直達接駁車抵達 T1，從容辦理報到退稅，滿載歸國！",
+      "cultureTip": "成田山表參道擁有近三百年歷史，川豐鰻魚飯通常需先於店門口抽取號碼牌，炭烤師傅刀工手法爐火純青，值得細細欣賞。",
+      "safetyTip": "出境前請再次確認護照、退稅商品、液體隨身規範（100ml 以上液體必須託運）與登機門位置。",
+      "sunnySpots": [
+        {
+          "id": "d9-s1",
+          "time": "08:30",
+          "period": "上午",
+          "title": "HOTEL MYSTAYS 上野退房・搭車直達「成田站」",
+          "transport": "從京成上野站搭乘京成本線特急或 JR 上野站搭乘 JR 成田線直達「成田站」(約 50 分鐘)",
+          "desc": "退房出發，列車一路順向朝成田機場方向移動，完全不走回頭路，車程舒適愜意。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "京成成田駅"
+        },
+        {
+          "id": "d9-s2",
+          "time": "09:30",
+          "period": "上午",
+          "title": "成田車站寄放大件行李（投幣置物櫃 / 觀光案內所人工寄物）",
+          "transport": "JR 成田站 / 京成成田站大廳寄物區",
+          "desc": "在成田車站大型投幣式置物櫃（Coin Lockers）或站前觀光案內所寄放大件行李與 Costco 戰利品，一身輕裝兩手空空漫步出發。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "JR 成田駅"
+        },
+        {
+          "id": "d9-s3",
+          "time": "09:45",
+          "period": "上午",
+          "title": "成田山新勝寺與江戶風情表參道老街漫步",
+          "transport": "成田車站前步行 3 分鐘進入表參道",
+          "desc": "沿著蜿蜒充滿江戶風情的百年木造建築石板路漫步，兩旁飄著醬油烤仙貝、落花生與老茶舖香氣，造訪擁有千年以上歷史的真言宗大本山新勝寺大本堂為家人祈福安康。",
+          "category": "spot",
+          "completed": false,
+          "mapsQuery": "成田山新勝寺"
+        },
+        {
+          "id": "d9-s4",
+          "time": "11:30",
+          "period": "中午",
+          "title": "成田山必吃當地美食午餐：百年傳奇現烤鰻魚飯（川豐 本店 / 駿河屋）",
+          "transport": "成田山表參道中段步行抵達",
+          "desc": "品嚐成田市舉世聞名的第一名物炭火現烤鰻魚飯！名店「川豐 本店」創業於 1910 年，職人現場熟練剖鰻炭烤，浸潤百年秘傳醬汁，外皮焦香金黃、肉質軟嫩肥美，鋪在白飯上每一口都是絕頂美味！",
+          "category": "restaurant",
+          "completed": false,
+          "mapsQuery": "川豊 本店"
+        },
+        {
+          "id": "d9-s5",
+          "time": "12:45",
+          "period": "中午",
+          "title": "永旺夢樂城成田店 (AEON MALL Narita) 出境前最後採購",
+          "transport": "返回成田站取回行李，搭乘成田站西口專用接駁巴士 15 分鐘直達 AEON MALL Narita",
+          "desc": "抵達深受國際旅客喜愛的 AEON MALL Narita 旗艦店！在超大型超級市場採購日本抹茶、在地零食、箱裝伴手禮與免稅藥妝，打包入行李箱做好登機準備。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "イオンモール成田"
+        },
+        {
+          "id": "d9-s6",
+          "time": "14:00",
+          "period": "下午",
+          "title": "搭乘接駁車直達成田機場 T1（提前 3.5 小時國際線機場收攏）",
+          "transport": "從 AEON MALL Narita 搭乘成田機場接駁巴士或計程車約 15 分鐘直達 T1",
+          "desc": "於 14:15 準時抵達成田國際機場第一航廈 (NRT T1)，時間從容無比！",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "成田国際空港 第1ターミナル"
+        },
+        {
+          "id": "d9-s7",
+          "time": "14:15",
+          "period": "下午",
+          "title": "成田機場 T1：聯合航空 UA837 登機報到・退稅與免稅品取貨",
+          "transport": "成田機場第一航廈出境大廳 4F",
+          "desc": "在聯合航空櫃台辦理行李託運與劃位，通過安檢與自動通關，在免稅店採買白色戀人、ROYCE 生巧克力與酒類伴手禮。",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "成田国際空港 第1ターミナル 出発ロビー"
+        },
+        {
+          "id": "d9-s8",
+          "time": "17:45",
+          "period": "傍晚",
+          "title": "搭乘 UA837 班機起飛・滿載美好回憶平安返抵高雄",
+          "transport": "搭乘 UA837 班機直飛高雄國際機場 (預計 21:15 抵達 KHH)",
+          "desc": "帶著滿滿的照片、精品戰利品與難忘回憶踏上歸途，9 天 8 夜東京橫濱千葉成田深度自由行圓滿成功！",
+          "category": "transport",
+          "completed": false,
+          "mapsQuery": "成田空港 Gate"
+        }
+      ],
+      "rainSpots": [
+        {
+          "id": "d9-r1",
+          "time": "12:45",
+          "period": "下午",
+          "title": "AEON MALL Narita 永旺夢樂城全室內商場 & 機場直達接駁",
+          "transport": "大型室內商場，專屬巴士站直通機場免淋雨",
+          "desc": "全館室內空調遮蔽，推著行李車輕鬆購物，商場門口即為成田機場直達巴士站，天候不佳亦能安心收攏歸國。",
+          "category": "shopping",
+          "completed": false,
+          "mapsQuery": "イオンモール成田"
+        }
+      ]
+    }
+  ]
+}

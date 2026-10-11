@@ -1,0 +1,21 @@
+# 敏感金鑰設定檔（絕對禁止上傳至 GitHub！）
+.env
+.env.*
+
+# Python 快取與虛擬環境
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# 暫存測試檔案與腳本
+scratch/
+test_*.py
+inspect_*.py
+update_*.py
+build_*.py
+generate_*.py
+apply_*.py
+add_dining_*.py
+fuji_ocr_*.txt

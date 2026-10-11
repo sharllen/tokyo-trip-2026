@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Elite Travel 智慧旅遊指南 & 隨身管家</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand-title">
+        <span>✈️ Elite Travel</span>
+        <span class="brand-badge">PRO v1.4</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-open-api-key" class="btn-icon" style="background:#2563eb; border-color:#1d4ed8; font-weight:700;" title="本機後端 AI 安全金鑰">🔑 AI後端: <span id="backend-status-indicator">⚪ 連線中</span></button>
+        <button id="btn-open-packing" class="btn-icon btn-icon-accent" title="行前行李打包清單">🎒 行李清單</button>
+        <button id="btn-open-emergency" class="btn-icon" style="background:rgba(239,68,68,0.85); border-color:#dc2626;" title="海外急難救助">🆘 急難備忘</button>
+        <button id="btn-export-data" class="btn-icon" title="匯出資料">📤 匯出</button>
+        <button id="btn-import-data" class="btn-icon" title="匯入資料">📥 匯入</button>
+        <button id="btn-print-markdown" class="btn-icon" title="列印或轉存筆記">📄 筆記</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Stage Navigator (3 大核心階段切換) -->
+    <nav class="stage-nav">
+      <button class="stage-btn active" data-stage="1">
+        <span class="stage-num">階段 1</span>
+        <span>📝 智慧規劃</span>
+      </button>
+      <button class="stage-btn" data-stage="2">
+        <span class="stage-num">階段 2</span>
+        <span>🧭 智能提醒</span>
+      </button>
+      <button class="stage-btn" data-stage="3">
+        <span class="stage-num">階段 3</span>
+        <span>💰 記帳與工具</span>
+      </button>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- STAGE 1: 現代化多管道旅遊需求規劃嚮導 -->
+    <!-- ========================================== -->
+    <section id="stage-1" class="stage-view">
+      <div class="section-hero-banner">
+        <div>
+          <h3>🗺️ 頂級智慧自由行規劃嚮導</h3>
+          <p>真實可執行 ｜ 動線合理 ｜ 交通順暢 ｜ 體力可負荷 ｜ 晴雨備案齊全</p>
+        </div>
+        <button id="btn-load-demo" class="btn btn-secondary btn-sm" style="font-weight:700;">
+          ⚡ 載入東京 5 天 4 夜高品質範本
+        </button>
+      </div>
+
+      <form id="plan-form">
+        <!-- 步驟 1: 旅程基本資訊 -->
+        <div class="step-section">
+          <div class="step-header">
+            <div class="step-number">1</div>
+            <div class="step-title">旅程基本資訊 (Trip Basics)</div>
+          </div>
+          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="trip-name">旅遊名稱</label>
+              <input type="text" id="trip-name" class="form-control" placeholder="例如：2026 東京初秋美食與文化漫遊" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="trip-destination">目的地（國家 / 城市）</label>
+              <input type="text" id="trip-destination" class="form-control" placeholder="例如：日本 東京" required>
+            </div>
+          </div>
+
+          <div class="form-row form-row-3">
+            <div class="form-group">
+              <label class="form-label" for="trip-start-date">出發日期</label>
+              <input type="date" id="trip-start-date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="trip-end-date">回程日期</label>
+              <input type="date" id="trip-end-date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="trip-members">同行親友名單（以逗號分隔）</label>
+              <input type="text" id="trip-members" class="form-control" placeholder="小明, 小華, 小美" value="小明, 小華, 小美">
+            </div>
+          </div>
+        </div>
+
+        <!-- 步驟 2: 航班與住宿憑證 -->
+        <div class="step-section">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <div class="step-title">航班與住宿憑證 (Flights & Hotel)</div>
+          </div>
+          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="flight-dept">🛫 去程航班資訊</label>
+              <input type="text" id="flight-dept" class="form-control" placeholder="長榮 BR198 | TPE 08:50 -> NRT 13:15 (T1 Gate 24)">
+              <small style="color:var(--text-muted); font-size:0.75rem;">顧問原則：首日落地後約 2 小時展開周邊動線</small>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="flight-return">🛬 回程航班資訊</label>
+              <input type="text" id="flight-return" class="form-control" placeholder="長榮 BR197 | NRT 14:15 -> TPE 17:05 (T1 Gate 32)">
+              <small style="color:var(--text-muted); font-size:0.75rem;">顧問原則：國際線嚴格提前 3.5 小時抵達機場</small>
+            </div>
+          </div>
+          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="hotel-name">🏨 住宿飯店名稱</label>
+              <input type="text" id="hotel-name" class="form-control" placeholder="例如：三井花園飯店 汐留義大利街">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="hotel-address">📍 飯店地址與電話（司機指引）</label>
+              <input type="text" id="hotel-address" class="form-control" placeholder="東京都港區東新橋2-14-24 (+81 3-3431-1131)">
+            </div>
+          </div>
+        </div>
+
+        <!-- 步驟 3: 旅程主題、節奏與同行成員 (實用主流旅遊 APP 規格) -->
+        <div class="step-section">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <div class="step-title">旅程主題、節奏與同行成員 (Themes & Pace)</div>
+          </div>
+
+          <!-- 旅程主題（可複選） -->
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label class="form-label" style="margin-bottom:0;">🎯 旅程主要主題與偏好（可多選）</label>
+              <div class="custom-chip-adder">
+                <input type="text" id="input-new-theme" placeholder="+ 自訂主題">
+                <button type="button" id="btn-add-theme" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+              </div>
+            </div>
+            <div class="chip-group" id="chip-group-themes">
+              <button type="button" class="chip-btn active" data-val="美食探索">🍣 美食探索 (必吃老店/在地料理)</button>
+              <button type="button" class="chip-btn active" data-val="購物逛街">🛍️ 購物逛街 (百貨商圈/藥妝免稅)</button>
+              <button type="button" class="chip-btn" data-val="歷史文化">🏮 歷史文化 (神社古蹟/博物館)</button>
+              <button type="button" class="chip-btn" data-val="自然景觀">🏞️ 自然景觀 (公園庭園/海景夕陽)</button>
+              <button type="button" class="chip-btn" data-val="打卡地標">📸 打卡地標 (高空展望/人氣地標)</button>
+              <button type="button" class="chip-btn" data-val="溫泉放鬆">💆 溫泉放鬆 (悠閒漫步/景觀咖啡)</button>
+            </div>
+            <input type="hidden" id="travel-themes" value="美食探索, 購物逛街">
+          </div>
+
+          <!-- 每日步調節奏 -->
+          <div class="form-group">
+            <label class="form-label">⏱️ 行程步調節奏 (Trip Pace)</label>
+            <div class="chip-group" id="chip-group-pace">
+              <button type="button" class="chip-btn" data-val="悠閒慢活">☕ 悠閒慢活 (每日 2~3 個點，充裕時間放空不趕場)</button>
+              <button type="button" class="chip-btn active" data-val="充實均衡">⚖️ 充實均衡 (每日 4~5 個點，動線經典順暢)</button>
+              <button type="button" class="chip-btn" data-val="緊湊豐富">🚀 緊湊豐富 (每日 6+ 個點，高效率踩點探索)</button>
+            </div>
+            <input type="hidden" id="travel-pace" value="充實均衡">
+          </div>
+
+          <!-- 同行成員型態 -->
+          <div class="form-group">
+            <label class="form-label">👥 同行成員型態 (Companions)</label>
+            <div class="chip-group" id="chip-group-companions">
+              <button type="button" class="chip-btn active" data-val="親友同行">👫 親友同行 (兼顧各自喜好、分帳便利)</button>
+              <button type="button" class="chip-btn" data-val="情侶伴侶">🌹 情侶伴侶 (氣氛餐廳、夜景漫步、步調浪漫)</button>
+              <button type="button" class="chip-btn" data-val="親子家庭">👨‍👩‍👧 親子家庭 (推車友善、少排隊、景點安全)</button>
+              <button type="button" class="chip-btn" data-val="長輩同遊">👵 長輩同遊 (少樓梯、步程平緩、定點休閒)</button>
+              <button type="button" class="chip-btn" data-val="個人獨旅">🎒 個人獨旅 (高自由度、隨興彈性、安全優先)</button>
+            </div>
+            <input type="hidden" id="travel-companions" value="親友同行">
+          </div>
+
+          <!-- 漸進式展開：進階偏好設定 (交通方式、餐點喜好、預算等級) -->
+          <button type="button" id="btn-toggle-advanced-prefs" class="advanced-toggle-btn">
+            <span>⚙️ 展開進階旅遊偏好（交通方式、餐點喜好、每日預算）</span>
+            <span id="advanced-toggle-arrow">▼ 點擊展開</span>
+          </button>
+
+          <div id="advanced-prefs-container" class="hidden" style="background:#f8fafc; border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; margin-bottom:14px;">
+            <!-- 交通偏好 -->
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <label class="form-label" style="margin-bottom:0;">🚗 主要交通移動方式偏好</label>
+                <div class="custom-chip-adder">
+                  <input type="text" id="input-new-transport" placeholder="+ 自訂交通">
+                  <button type="button" id="btn-add-transport" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+                </div>
+              </div>
+              <div class="chip-group" id="chip-group-transport">
+                <button type="button" class="chip-btn active" data-val="大眾捷運鐵路">🚇 大眾捷運/鐵路電車 (省錢準時)</button>
+                <button type="button" class="chip-btn" data-val="租車自駕">🚗 租車自駕 (行程自由、近郊首選)</button>
+                <button type="button" class="chip-btn" data-val="計程車包車">🚕 計程車/包車 (長輩小孩省力輕鬆)</button>
+                <button type="button" class="chip-btn" data-val="深度步行漫步">🚶 深度步行慢遊 (探索巷弄小店)</button>
+              </div>
+              <input type="hidden" id="travel-transport" value="大眾捷運鐵路">
+            </div>
+
+            <!-- 餐點美食喜好 -->
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <label class="form-label" style="margin-bottom:0;">🍽️ 餐點美食風格偏好（可多選）</label>
+                <div class="custom-chip-adder">
+                  <input type="text" id="input-new-dining" placeholder="+ 自訂餐點">
+                  <button type="button" id="btn-add-dining" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+                </div>
+              </div>
+              <div class="chip-group" id="chip-group-dining">
+                <button type="button" class="chip-btn active" data-val="在地排隊名店">🍣 在地特色排隊名店</button>
+                <button type="button" class="chip-btn active" data-val="頂級和牛燒肉">🥩 頂級和牛 / 燒肉壽喜燒</button>
+                <button type="button" class="chip-btn" data-val="街頭庶民小吃">🍜 街頭小吃與屋台市集</button>
+                <button type="button" class="chip-btn" data-val="景觀甜點咖啡">☕ 景觀咖啡廳與當季甜點</button>
+                <button type="button" class="chip-btn" data-val="預約制星級料理">🍱 預約制名店 / 米其林</button>
+                <button type="button" class="chip-btn" data-val="蔬食素食友善">🥗 蔬食素食 / 清真友善</button>
+              </div>
+              <input type="hidden" id="travel-dining" value="在地排隊名店, 頂級和牛燒肉">
+            </div>
+
+            <!-- 預算區間 -->
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">💵 預期每日預算等級</label>
+              <div class="chip-group" id="chip-group-budget">
+                <button type="button" class="chip-btn" data-val="經濟小資">💰 經濟小資 ($)</button>
+                <button type="button" class="chip-btn active" data-val="充實適中">💳 充實適中 ($$)</button>
+                <button type="button" class="chip-btn" data-val="奢華享受">💎 奢華享受 ($$$)</button>
+              </div>
+              <input type="hidden" id="travel-budget" value="充實適中">
+            </div>
+          </div>
+
+          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="must-go-list">⭐ 願望清單（必去景點/美食，以逗號分隔）</label>
+              <input type="text" id="must-go-list" class="form-control" placeholder="淺草寺, SHIBUYA SKY, 敘敘苑燒肉, 築地場外市場">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="must-avoid-list">🚫 特殊需求與避雷限制（飲食禁忌/避開項）</label>
+              <input type="text" id="must-avoid-list" class="form-control" placeholder="不吃生食, 避免需排隊 2 小時以上店家">
+            </div>
+          </div>
+        </div>
+
+        <!-- 步驟 4: 多管道原有行程與檔案上傳中心 (核心優化) -->
+        <div class="step-section">
+          <div class="step-header">
+            <div class="step-number">4</div>
+            <div class="step-title">原有行程匯入中心 (Multi-Source Ingest Hub)</div>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">
+            您可以透過<strong>文件上傳、機票照片截圖、Google 雲端硬碟連結</strong>或<strong>筆記文字</strong>，AI 會自動識別並整合至行程：
+          </p>
+
+          <!-- 匯入方式分頁標籤 -->
+          <div class="source-tab-bar">
+            <button type="button" class="source-tab-btn active" data-tab="tab-file">📎 文件 / PDF / 檔案上傳</button>
+            <button type="button" class="source-tab-btn" data-tab="tab-photo">📸 機票截圖 / 行程照片</button>
+            <button type="button" class="source-tab-btn" data-tab="tab-cloud">☁️ Google 雲端硬碟 / 連結讀取</button>
+            <button type="button" class="source-tab-btn" data-tab="tab-text">✍️ 備忘筆記自由貼上</button>
+          </div>
+
+          <!-- 分頁 1: 文件/資料夾/壓縮檔批次上傳 (解決一張一張傳的困擾) -->
+          <div id="tab-file" class="source-tab-content">
+            <div class="file-drop-area" id="file-drop-box" style="border: 2px dashed #3b82f6; background: #f0f7ff; padding: 22px; text-align: center; border-radius: 8px; cursor: pointer; transition: all 0.2s ease;">
+              <div style="pointer-events: none;">
+                <p style="font-weight:700; font-size:1.05rem; color:#1e40af; margin-bottom: 4px;">
+                  📦 拖曳整包 Google 雲端 ZIP 壓縮檔、整個資料夾或多檔案批次上傳
+                </p>
+                <span style="font-size:0.85rem; color:#475569; display:block; margin-bottom: 12px; line-height:1.5;">
+                  支援 <strong>Google 雲端下載的整包 ZIP 壓縮檔</strong>、PDF 機票、Word、文字檔、照片；系統<strong>自動在瀏覽器記憶體中整批解開並解析</strong>，絕不需要一張一張傳！
+                </span>
+              </div>
+              <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+                <button type="button" id="btn-trigger-zip" class="btn btn-primary btn-sm" style="font-size:0.85rem; font-weight:700; background:#2563eb; color:#fff; pointer-events:auto;">
+                  📦 選擇 ZIP 壓縮檔 (.zip)
+                </button>
+                <button type="button" id="btn-trigger-batch-files" class="btn btn-secondary btn-sm" style="font-size:0.85rem; pointer-events:auto;">
+                  📄 選擇任何檔案 (*.* 多選)
+                </button>
+                <button type="button" id="btn-trigger-folder" class="btn btn-secondary btn-sm" style="font-size:0.85rem; pointer-events:auto;">
+                  📁 選取整本電腦/雲端資料夾
+                </button>
+              </div>
+              <!-- 專用 ZIP 輸入（精準過濾 .zip，在 Windows 檔案選擇框中立即可見） -->
+              <input type="file" id="zip-file-input" accept=".zip,application/zip,application/x-zip-compressed,application/x-zip" class="hidden">
+              <!-- 一般檔案輸入（無限制副檔名，Windows 檔案選擇框預設顯示所有檔案） -->
+              <input type="file" id="doc-file-input" multiple class="hidden">
+              <input type="file" id="folder-file-input" webkitdirectory directory multiple class="hidden">
+            </div>
+            <div id="file-upload-chips" class="uploaded-chips-container" style="margin-top:10px;">
+              <!-- 批次已上傳文件徽章 -->
+            </div>
+          </div>
+
+          <!-- 分頁 2: 拍照 / 截圖批次上傳 -->
+          <div id="tab-photo" class="source-tab-content hidden">
+            <div class="file-drop-area" id="photo-drop-box">
+              <p style="font-weight:700; font-size:0.95rem;">📷 拍照或批次上傳機票／行程表截圖 (支援多選)</p>
+              <span style="font-size:0.8rem; color:var(--text-muted);">可一次框選多張照片，自動執行 OCR 影像識別並提取行程</span>
+              <input type="file" id="photo-file-input" accept="image/*" multiple class="hidden">
+            </div>
+            <div id="photo-preview-box" class="preview-thumb-box">
+              <!-- 縮圖預覽 -->
+            </div>
+          </div>
+
+          <!-- 分頁 3: Google 雲端硬碟 / 線上連結與內容萃取 -->
+          <div id="tab-cloud" class="source-tab-content hidden">
+            <!-- 專為 Google 雲端整包下載設計的 ZIP 拖曳上傳區 -->
+            <div class="file-drop-area" id="cloud-zip-drop-box" style="border: 2px dashed #2563eb; background: #eff6ff; padding: 18px; text-align: center; border-radius: 8px; cursor: pointer; margin-bottom: 12px; transition: all 0.2s ease;">
+              <div style="pointer-events: none;">
+                <p style="font-weight:700; font-size:1rem; color:#1d4ed8; margin-bottom: 4px;">
+                  📦 拖曳整包 Google 雲端下載的 ZIP 壓縮檔到這裡（或直接點擊選取）
+                </p>
+                <span style="font-size:0.82rem; color:#475569; display:block; margin-bottom: 10px;">
+                  從 Google 雲端資料夾按「下載」取得的整包 ZIP 檔，直接拖入或點擊選擇，系統將<strong>自動解壓縮並萃取全部檔案</strong>！
+                </span>
+              </div>
+              <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+                <button type="button" id="btn-trigger-cloud-zip" class="btn btn-primary btn-sm" style="font-size:0.85rem; font-weight:700; pointer-events:auto;">
+                  📦 選擇 Google 雲端 ZIP 壓縮檔 (.zip)
+                </button>
+                <button type="button" id="btn-trigger-cloud-all" class="btn btn-secondary btn-sm" style="font-size:0.85rem; pointer-events:auto;">
+                  📄 選擇雲端檔案 (*.*)
+                </button>
+              </div>
+              <input type="file" id="cloud-zip-file-input" accept=".zip,application/zip,application/x-zip-compressed,application/x-zip" class="hidden">
+              <input type="file" id="cloud-all-file-input" multiple class="hidden">
+            </div>
+            <div id="cloud-file-upload-chips" class="uploaded-chips-container" style="margin-bottom:10px;"></div>
+
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="form-label" for="cloud-url-input">🔗 Google 雲端硬碟分享連結 / Notion 頁面 / Google Maps 景點地圖網址</label>
+              <div style="display:flex; gap:8px;">
+                <input type="url" id="cloud-url-input" class="form-control" placeholder="https://drive.google.com/drive/folders/... 或 Google Maps 清單網址">
+                <button type="button" id="btn-fetch-cloud" class="btn btn-secondary" style="flex-shrink:0;">
+                  讀取解析
+                </button>
+              </div>
+            </div>
+            <div id="cloud-fetch-status" style="font-size:0.8rem; margin-bottom:10px;"></div>
+
+            <!-- 雲端檔案內容直接貼上區塊（因 Google 權限與瀏覽器 CORS 安全性，提供無縫直通解析） -->
+            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:var(--radius-xs); padding:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:6px;">
+                <label class="form-label" for="cloud-paste-text" style="margin-bottom:0; font-size:0.85rem; color:#0f172a;">
+                  📋 貼上雲端文件內容 / 機票行程文字（AI 深度精準萃取）
+                </label>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                  <button type="button" id="btn-load-sample-tokyo9" class="btn btn-primary btn-sm" style="font-size:0.75rem; padding:3px 10px; font-weight:700; background:var(--primary); color:#fff;">
+                    ⚡ 載入您的行程：10/19~10/27 東京 9 日遊
+                  </button>
+                  <button type="button" id="btn-load-sample-cloud" class="btn btn-secondary btn-sm" style="font-size:0.75rem; padding:3px 8px;">
+                    範例：沖繩 4 天
+                  </button>
+                </div>
+              </div>
+              <textarea id="cloud-paste-text" class="form-control" rows="3" placeholder="若您的 Google 雲端需要登入權限，可直接將資料夾內的機票確認信、飯店訂單或行程筆記貼於此處，系統將自動精準萃取並全站更新！"></textarea>
+              <button type="button" id="btn-parse-pasted-cloud" class="btn btn-primary btn-sm" style="margin-top:8px;">
+                ⚡ 立即解析文字並更新全站航班、飯店與天數
+              </button>
+            </div>
+          </div>
+
+          <!-- 分頁 4: 純文字貼上 -->
+          <div id="tab-text" class="source-tab-content hidden">
+            <textarea id="custom-input-text" class="form-control" rows="4" placeholder="可以直接貼上您想去的額外景點、社群推薦連結、航班代碼或每日自訂備忘..."></textarea>
+          </div>
+        </div>
+
+        <!-- 步驟 5: 智慧行程規劃與即時預覽 (核心規劃引擎) -->
+        <div class="step-section" id="planning-control-section" style="border: 2px solid #3b82f6; background: #f8fafc;">
+          <div class="step-header">
+            <div class="step-number" style="background:#2563eb; color:#fff;">5</div>
+            <div class="step-title">生成與審閱行程規劃 (Itinerary Planning & Review)</div>
+          </div>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+            設定好資料或匯入雲端行程後，點擊下方按鈕啟動 AI 規劃引擎。您可在本階段直接審閱每日時間表與動線，滿意後再啟用即時提醒看板：
+          </p>
+
+          <div class="plan-action-bar">
+            <button type="button" id="btn-start-planning" class="btn btn-primary" style="padding:12px 24px; font-size:1rem; box-shadow:0 4px 12px rgba(37,99,235,0.3);">
+              🚀 開始 AI 智慧規劃 / 重新規劃行程
+            </button>
+            <button type="button" id="btn-reset-planning" class="btn btn-secondary" style="padding:12px 18px;">
+              🔄 還原為預設範本
+            </button>
+          </div>
+
+          <!-- 動態規劃進度條 (點擊規劃時顯示) -->
+          <div id="ai-planning-progress" class="ai-plan-progress-box hidden">
+            <div style="font-weight:700; font-size:0.95rem; color:#15803d;" id="progress-status-text">
+              ✨ 正在啟動規劃引擎...
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="planning-progress-fill"></div>
+            </div>
+            <small style="color:#166534;" id="progress-sub-text">分析航班、雲端資料、步調節奏與防折返單向動線中...</small>
+          </div>
+
+          <!-- 本地生成的行程預覽看板 (Stage 1 內即可檢視與確認) -->
+          <div id="plan-preview-board" class="plan-preview-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #bfdbfe; padding-bottom:8px;">
+              <div>
+                <h4 style="font-size:1.05rem; font-weight:800; color:#1e3a8a;">📋 規劃行程即時預覽 (共 <span id="preview-day-count">5</span> 天)</h4>
+                <small style="color:var(--text-muted);">已結合航班、主題偏好、雲端上傳景點與晴雨備案</small>
+              </div>
+              <span class="tag" style="background:#dbeafe; color:#1e40af; font-weight:700;">可隨時重新規劃</span>
+            </div>
+
+            <!-- 預覽天數卡片容器 -->
+            <div id="preview-days-list">
+              <!-- 動態渲染各天行程摘要 -->
+            </div>
+
+            <!-- 滿意後的轉入按鈕 -->
+            <div style="margin-top:18px; padding-top:14px; border-top:2px dashed #93c5fd; text-align:center;">
+              <button type="button" id="btn-confirm-to-stage2" class="btn btn-success btn-block" style="padding:14px; font-size:1.05rem; font-weight:800; box-shadow:0 4px 14px rgba(16,185,129,0.3);">
+                ✅ 確認此行程規劃，進入第二階段：智能提醒動態看板 ➔
+              </button>
+              <small style="display:block; margin-top:6px; color:var(--text-muted);">
+                點擊後將為您開啟出行動態提醒、即將來臨景點高亮與即時 Google Maps 導航
+              </small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- STAGE 2: 出行期 智能旅遊提醒與動態看板 -->
+    <!-- ========================================== -->
+    <section id="stage-2" class="stage-view hidden">
+      <!-- 置頂資訊看板 (旅遊名稱、航班、飯店) -->
+      <div class="fixed-trip-banner">
+        <div class="banner-header">
+          <div>
+            <div class="banner-title" id="banner-trip-title">2026 東京初秋漫遊</div>
+            <div class="banner-destination" id="banner-trip-meta">日本 東京 ｜ 2026-10-15 ~ 2026-10-19</div>
+          </div>
+          <div>
+            <span id="banner-day-counter" class="brand-badge" style="background:#f59e0b; color:#fff; font-weight:700;">進行中</span>
+          </div>
+        </div>
+
+        <div class="banner-grid">
+          <div class="banner-card">
+            <h4>🛫 去程航班資訊</h4>
+            <p id="banner-flight-dept">長榮 BR198 ｜ TPE -> NRT (T1 Gate 24)</p>
+            <small>抵達時間 13:15 ｜ 首日落地後 2 小時展開周邊動線</small>
+          </div>
+          <div class="banner-card">
+            <h4>🏨 住宿飯店與導航</h4>
+            <p id="banner-hotel-name">三井花園飯店 汐留義大利街</p>
+            <small id="banner-hotel-address">東京都港區東新橋2-14-24 ｜ <a id="btn-hotel-nav" href="#" target="_blank" style="color:#60a5fa; text-decoration:underline;">Google Maps 導航</a></small>
+          </div>
+        </div>
+      </div>
+
+      <!-- 旅途隨身 AI 顧問 (即時感知當前時間與景點) -->
+      <div class="card" style="border: 2px solid #8b5cf6; background: #faf5ff; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h4 style="margin:0; color:#6b21a8; font-size:1rem; display:flex; align-items:center; gap:6px;">
+            🤖 旅途隨身 AI 顧問 (Gemini 2.0 Flash 現場應變)
+          </h4>
+          <span class="tag" style="background:#f3e8ff; color:#7c3aed; font-weight:700;">情境即時感知</span>
+        </div>
+        <p style="font-size:0.82rem; color:#64748b; margin-bottom:10px;">
+          依據您當前日本時間、所在位置與整份行程，由 20 年顧問級 AI 即時給予不折返的交通走法、雨天替換或在地私房名店：
+        </p>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+          <button type="button" class="btn btn-secondary btn-sm quick-advisor-btn" data-q="現在突發下雨，請推薦附近完全不淋雨的室內雨備與順路走法">🛡️ 突發雨備替換</button>
+          <button type="button" class="btn btn-secondary btn-sm quick-advisor-btn" data-q="我們目前行程落後約 1 小時，請幫忙調整後續行程優先級">⏱️ 行程落後重排</button>
+          <button type="button" class="btn btn-secondary btn-sm quick-advisor-btn" data-q="請推薦附近走路 10 分鐘內、在地人好評的隱藏美食排隊名店">🍜 附近隱藏美食</button>
+          <button type="button" class="btn btn-secondary btn-sm quick-advisor-btn" data-q="請問從現在景點前往下一個景點最順的大眾運輸轉乘方式">🚇 最佳換乘動線</button>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="input-advisor-msg" class="form-control" placeholder="或自訂提問：例如「上野車站哪裡可以寄放 28 吋大行李箱？」">
+          <button type="button" id="btn-send-advisor" class="btn btn-primary" style="flex-shrink:0; background:#7c3aed; border-color:#6d28d9;">發送提問</button>
+        </div>
+        <div id="advisor-response-box" class="hidden" style="margin-top:12px; background:#fff; border:1px solid #ddd6fe; border-radius:6px; padding:12px; font-size:0.88rem; line-height:1.6; color:#1e1b4b;">
+          <div style="font-weight:700; color:#6d28d9; margin-bottom:4px;">💡 AI 顧問現場建議：</div>
+          <div id="advisor-response-text"></div>
+        </div>
+      </div>
+
+      <!-- 智能時間軸對照 (即將來臨的行程) -->
+      <div class="card" style="border: 2px solid var(--primary); background: #ffffff;">
+        <div class="card-header" style="margin-bottom: 8px;">
+          <h3 class="card-title" style="color: var(--primary);">
+            ⏱️ 智能即時動態：即將來臨的行程
+          </h3>
+          <div style="font-size: 0.8rem; color: var(--text-muted); display:flex; gap:6px; align-items:center;">
+            <span>模擬時間：</span>
+            <input type="time" id="sim-time" value="14:00" style="padding: 2px 4px; font-size: 0.8rem; border:1px solid #cbd5e1; border-radius:4px;">
+          </div>
+        </div>
+        <div id="upcoming-spot-card">
+          <!-- 動態載入即將到達景點 -->
+        </div>
+      </div>
+
+      <!-- 天數切換標籤列 -->
+      <div class="day-scroll-bar" id="day-tabs-container">
+        <!-- 動態產生 Day 1, Day 2 ... -->
+      </div>
+
+      <!-- 當日控制與狀態列 (晴雨備案、體力預警、打勾進度) -->
+      <div class="plan-sub-bar">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button id="btn-toggle-rain" class="btn btn-secondary btn-sm">
+            ☀️ 晴天行程（點擊切換 🌧️ 雨備方案）
+          </button>
+        </div>
+        <div>
+          <span id="fatigue-indicator" class="fatigue-pill fatigue-low">
+            👟 步數負荷：適中 (~11,000 步)
+          </span>
+        </div>
+      </div>
+
+      <!-- 當日行程時間軸內容 -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title" id="day-theme-title">Day 1 ｜ 抵達東京與銀座汐留初夜</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="day-date-str">2026-10-15</span>
+        </div>
+
+        <div id="timeline-container">
+          <!-- 上午、下午、晚上時程項目動態注入 -->
+        </div>
+
+        <!-- 當日後勤安全與文化提醒 -->
+        <div style="margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); display: grid; grid-template-columns: 1fr; gap: 8px;">
+          <div style="background: #eff6ff; padding: 10px; border-radius: var(--radius-xs); font-size: 0.85rem;">
+            <strong>📦 行李與後勤提醒：</strong>
+            <span id="day-logistics-tip">大件行李可先寄放飯店櫃台，隨身攜帶交通卡與護照。</span>
+          </div>
+          <div style="background: #fefce8; padding: 10px; border-radius: var(--radius-xs); font-size: 0.85rem;">
+            <strong>💡 在地文化提醒：</strong>
+            <span id="day-culture-tip">電車內請將手機調為靜音模式，手扶梯東京靠左站立。</span>
+          </div>
+          <div style="background: #fdf2f8; padding: 10px; border-radius: var(--radius-xs); font-size: 0.85rem;">
+            <strong>⚠️ 安全注意事項：</strong>
+            <span id="day-safety-tip">末班車注意時間，夜間留意小巷安寧。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- STAGE 3: 費用計算、收據辨識與旅行小工具 -->
+    <!-- ========================================== -->
+    <section id="stage-3" class="stage-view hidden">
+      <!-- 費用統計與分帳卡片 -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">💰 旅程費用管理與親友分帳 (Splitwise 模組)</h2>
+          <button id="btn-show-add-expense" class="btn btn-primary btn-sm">➕ 記錄新支出</button>
+        </div>
+
+        <!-- 費用統計摘要 -->
+        <div class="expense-summary-grid">
+          <div class="stat-box">
+            <div class="stat-label">總花費 (TWD)</div>
+            <div class="stat-val" id="stat-total-expense">$0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">每人平均負擔</div>
+            <div class="stat-val" id="stat-avg-expense">$0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">收據總數</div>
+            <div class="stat-val" id="stat-receipt-count">0 筆</div>
+          </div>
+        </div>
+
+        <!-- 自動結算建議卡 (誰該給誰多少錢) -->
+        <div class="settlement-card">
+          <h4>🤝 親友智能分帳結算建議（一鍵平帳）：</h4>
+          <ul id="settlement-list">
+            <li>目前無待清償帳目。</li>
+          </ul>
+        </div>
+
+        <!-- 支出與收據拍照上傳區塊 -->
+        <div class="upload-dropzone" id="receipt-dropzone">
+          <svg fill="none" stroke="currentColor" viewBox="0 24 24" style="width:36px; height:36px; margin:0 auto 8px;" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <p style="font-weight: 700; font-size: 0.95rem;">📸 點擊拍照或上傳收據 / 發票</p>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">支援自動辨識品項與金額，並依照「日期與地點」自動歸類</span>
+          <input type="file" id="receipt-file-input" accept="image/*" class="hidden">
+        </div>
+        <div style="margin-top: 10px; text-align: center;">
+          <button type="button" id="btn-demo-receipt" class="btn btn-secondary btn-sm" style="font-weight: 700; background: #f0fdf4; border: 1px solid #86efac; color: #166534;">
+            🧪 一鍵載入真實日本收據範例測試 (Gemini OCR 自動算帳)
+          </button>
+        </div>
+
+        <!-- 支出清單表格 -->
+        <h4 style="font-size: 0.92rem; margin-bottom: 8px;">📑 支出收據明細清單</h4>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;" id="expense-table">
+            <thead>
+              <tr style="background: #f8fafc; border-bottom: 2px solid var(--border); text-align: left;">
+                <th style="padding: 8px;">日期/地點</th>
+                <th style="padding: 8px;">品項名稱</th>
+                <th style="padding: 8px;">金額</th>
+                <th style="padding: 8px;">付款人</th>
+                <th style="padding: 8px;">分攤對象</th>
+                <th style="padding: 8px;">操作</th>
+              </tr>
+            </thead>
+            <tbody id="expense-list-tbody">
+              <!-- 動態載入支出 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 智慧旅行多模態翻譯站 (文字輸入 / 語音對話 / 拍照翻譯) -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🗣️ 智慧旅行隨身翻譯官</h3>
+          <span class="tag" style="background:#e0f2fe; color:#0369a1; font-weight:700;">文字輸入 ｜ 語音對話 ｜ 拍照翻譯</span>
+        </div>
+
+        <!-- 翻譯模式切換分頁 -->
+        <div class="translator-tab-bar">
+          <button type="button" class="translator-tab-btn active" data-ttab="ttab-text">✍️ 雙向文字輸入 / 🎙️ 語音對話</button>
+          <button type="button" class="translator-tab-btn" data-ttab="ttab-photo">📷 菜單 / 路標拍照上傳翻譯</button>
+        </div>
+
+        <!-- 分頁 1: 文字輸入與語音對話 -->
+        <div id="ttab-text" class="translator-content-box">
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label class="form-label" for="trans-input-text" style="margin-bottom:0;">請輸入或語音說出想表達的中文：</label>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <label style="font-size:0.8rem; color:var(--text-muted);">翻譯為：</label>
+                <select id="trans-target-lang" class="form-select" style="padding:2px 8px; font-size:0.82rem; width:auto;">
+                  <option value="ja">日文 (日本語)</option>
+                  <option value="en">英文 (English)</option>
+                  <option value="ko">韓文 (한국어)</option>
+                </select>
+              </div>
+            </div>
+            <textarea id="trans-input-text" class="form-control" rows="2" placeholder="例如：請問這道菜有加洋蔥嗎？ / 請問退稅櫃台在哪裡？ / 可以幫我們合照一張嗎？"></textarea>
+            <div style="margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+              <span style="font-size: 0.76rem; color: var(--text-muted);">💡 點擊帶入測試情境：</span>
+              <button type="button" class="btn-sample-trans tag" data-text="請問這道菜有加牛肉或牛骨高湯嗎？" style="cursor:pointer; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe;">🍲 忌口/無牛肉詢問</button>
+              <button type="button" class="btn-sample-trans tag" data-text="請問免稅退稅櫃台在哪裡？不同專櫃可以合併計算嗎？" style="cursor:pointer; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe;">🛍️ 免稅退稅</button>
+              <button type="button" class="btn-sample-trans tag" data-text="不好意思，請問可以幫我們以晴空塔為背景合照一張嗎？" style="cursor:pointer; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe;">📸 拍照協助</button>
+              <button type="button" class="btn-sample-trans tag" data-text="請問這班成田特快（N'EX）需要先劃指定席車票嗎？" style="cursor:pointer; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe;">🚆 交通劃位</button>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button type="button" id="btn-do-translate" class="btn btn-primary btn-sm">
+              ✨ 即時翻譯
+            </button>
+            <button type="button" id="btn-voice-input" class="voice-btn-pulse">
+              🎙️ 點擊開始語音輸入
+            </button>
+            <span id="voice-status-text" style="font-size:0.78rem; color:var(--text-muted);"></span>
+          </div>
+
+          <!-- 翻譯結果大字體展示區 -->
+          <div id="trans-result-box" class="trans-result-card hidden">
+            <div style="font-size:0.75rem; color:#166534; font-weight:700; margin-bottom:4px;">
+              💡 翻譯結果（大字體出示給店家）：
+            </div>
+            <div class="trans-big-display" id="trans-output-text">
+              この料理に玉ねぎは入っていますか？
+            </div>
+            <div class="trans-romaji" id="trans-output-romaji">
+              Kono ryōri ni tamanegi wa haitte imasu ka?
+            </div>
+            <div class="trans-action-row">
+              <button type="button" id="btn-speak-result" class="btn btn-secondary btn-sm" style="background:#dcfce7; color:#15803d; border:1px solid #86efac;">
+                🔊 語音朗讀播放
+              </button>
+              <button type="button" id="btn-copy-trans" class="btn btn-secondary btn-sm">
+                📋 複製文字
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分頁 2: 拍照 / 圖片上傳翻譯 -->
+        <div id="ttab-photo" class="translator-content-box hidden">
+          <div class="upload-dropzone" id="trans-photo-dropzone" style="margin-bottom:10px;">
+            <svg fill="none" stroke="currentColor" viewBox="0 24 24" style="width:36px; height:36px; margin:0 auto 8px;" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <p style="font-weight:700; font-size:0.95rem;">📸 點擊拍照或上傳菜單、路標、商品標籤照片</p>
+            <span style="font-size:0.78rem; color:var(--text-muted);">自動執行影像 OCR 解析與繁體中文雙語對照說明</span>
+            <input type="file" id="trans-photo-input" accept="image/*" class="hidden">
+          </div>
+
+          <div id="trans-photo-preview" class="preview-thumb-box"></div>
+
+          <!-- 照片翻譯結果卡片 -->
+          <div id="trans-photo-result-box" class="trans-result-card hidden">
+            <div style="font-size:0.75rem; color:#166534; font-weight:700; margin-bottom:4px;">
+              🔍 圖片 OCR 辨識與繁體中文對照說明：
+            </div>
+            <div id="trans-photo-output-content" style="font-size:0.9rem; line-height:1.6; color:#1e293b;">
+              <!-- 動態載入菜單/路標辨識結果 -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 即時匯率換算器小工具 -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">💱 快速貨幣匯率試算</h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">即時對照換算</span>
+        </div>
+        <div class="form-row form-row-3">
+          <div class="form-group">
+            <label class="form-label" for="calc-amount">外幣金額</label>
+            <input type="number" id="calc-amount" class="form-control" value="1000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="calc-currency">幣別</label>
+            <select id="calc-currency" class="form-select">
+              <option value="0.21">日圓 (JPY) - 匯率約 0.210</option>
+              <option value="0.024">韓元 (KRW) - 匯率約 0.024</option>
+              <option value="32.5">美元 (USD) - 匯率約 32.5</option>
+              <option value="35.0">歐元 (EUR) - 匯率約 35.0</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">換算折合新台幣 (TWD)</label>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--primary); padding-top: 8px;" id="calc-result">
+              NT$ 210
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: 行李打包清單 (隨需開啟，不再佔用底部) -->
+  <!-- ========================================== -->
+  <div id="modal-packing" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 class="card-title">🎒 行前行李打包清單（分工打勾）</h3>
+        <button id="btn-close-packing-modal" class="btn-icon" style="color:#000;">✕</button>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">
+        親友共享清單，標註誰帶吹風機、誰帶轉接頭，防重複與漏帶：
+      </p>
+      <div id="packing-list-container">
+        <!-- 打包清單動態載入 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: 海外急難救助 (隨需開啟，不再佔用底部) -->
+  <!-- ========================================== -->
+  <div id="modal-emergency" class="modal-overlay hidden">
+    <div class="modal-content" style="border-top: 5px solid var(--danger);">
+      <div class="card-header">
+        <h3 class="card-title" style="color: var(--danger);">🆘 海外急難救援與通訊備忘</h3>
+        <button id="btn-close-emergency-modal" class="btn-icon" style="color:#000;">✕</button>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 10px; font-size: 0.88rem;">
+        <div style="background:#fef2f2; padding:10px; border-radius:6px;">
+          📞 <strong>外交部領事事務局緊急聯絡電話：</strong><br>
+          海外直撥：<a href="tel:+886-3-398-2629" style="color:var(--danger); font-weight:700;">+886-3-398-2629</a><br>
+          免付費專線：0800-085-095
+        </div>
+        <div style="background:#f8fafc; padding:10px; border-radius:6px; border:1px solid var(--border);">
+          🏨 <strong>飯店司機指引卡（請出示給計程車司機）：</strong><br>
+          <span id="driver-card-text" style="font-weight:700; color:var(--text-main);">目的地：三井ガーデンホテル汐留イタリア街（東京都港区東新橋2-14-24）</span>
+        </div>
+        <div style="background:#f8fafc; padding:10px; border-radius:6px; border:1px solid var(--border);">
+          🚑 <strong>當地警察 / 救護車緊急電話：</strong><br>
+          日本警察報案撥 <strong>110</strong> ｜ 救護車/火警報案撥 <strong>119</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增支出 Modal 彈窗 -->
+  <div id="modal-expense" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 class="card-title">➕ 記錄新花費</h3>
+        <button id="btn-close-expense-modal" class="btn-icon" style="color:#000;">✕</button>
+      </div>
+      <form id="form-add-expense">
+        <div class="form-group">
+          <label class="form-label" for="exp-title">支出品項名稱</label>
+          <input type="text" id="exp-title" class="form-control" placeholder="例如：敘敘苑午間燒肉套餐" required>
+        </div>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="exp-amount">金額</label>
+            <input type="number" id="exp-amount" class="form-control" placeholder="例如：12500" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exp-currency">幣別</label>
+            <select id="exp-currency" class="form-select">
+              <option value="JPY">日圓 (JPY)</option>
+              <option value="TWD">台幣 (TWD)</option>
+              <option value="USD">美元 (USD)</option>
+              <option value="KRW">韓元 (KRW)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="exp-date">日期</label>
+            <input type="date" id="exp-date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exp-location">地點 / 景點</label>
+            <input type="text" id="exp-location" class="form-control" placeholder="例如：銀座商圈">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="exp-payer">先行代墊付款人</label>
+          <select id="exp-payer" class="form-select">
+            <!-- 動態注入親友名單 -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">均攤成員（打勾參與分攤的人）</label>
+          <div id="exp-split-checkboxes" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <!-- 親友名單核取方塊 -->
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">儲存這筆支出</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 匯出/匯入資料 Modal -->
+  <div id="modal-data" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="card-header">
+        <h3 class="card-title" id="data-modal-title">資料管理</h3>
+        <button id="btn-close-data-modal" class="btn-icon" style="color:#000;">✕</button>
+      </div>
+      <div id="data-modal-body">
+        <textarea id="data-json-text" class="form-control" rows="10" style="font-family: monospace; font-size: 0.8rem;"></textarea>
+        <div style="margin-top: 10px; display: flex; gap: 8px;">
+          <button id="btn-confirm-import" class="btn btn-primary btn-sm">確認載入此資料</button>
+          <button id="btn-copy-json" class="btn btn-secondary btn-sm">複製內容</button>
+        </div>
+      </div>
+    </div>
+  <!-- Modal: 後端 AI 金鑰管理 -->
+  <div id="modal-api-key" class="modal-overlay hidden">
+    <div class="modal-content" style="max-width: 520px; border-top: 4px solid #2563eb;">
+      <div class="card-header">
+        <h3 class="card-title" style="color: #1e40af;">
+          🔑 本機後端安全金鑰管理 (Gemini 2.0 Flash)
+        </h3>
+        <button id="btn-close-api-key" class="btn-icon" style="color:#000;">✕</button>
+      </div>
+      <div style="padding: 10px 0;">
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:12px; font-size:0.85rem; color:#1e40af; margin-bottom:14px; line-height:1.5;">
+          🔒 <strong>最高資安保護：</strong> 金鑰將直接加密儲存在您電腦本機後端的 <code>.env</code> 環境檔中。所有機票照片、PDF 門票辨識均由本機後端呼叫 Google 官方 API，前端封包絕不外洩金鑰！
+        </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label" for="input-api-key" style="font-weight:700;">Google Gemini API Key</label>
+          <input type="password" id="input-api-key" class="form-control" placeholder="AIzaSy..." style="font-family:monospace;">
+          <small style="color:var(--text-muted); font-size:0.75rem; display:block; margin-top:4px;">
+            可至 <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--primary); text-decoration:underline;">Google AI Studio</a> 免費取得，終身免費不需信用卡。
+          </small>
+        </div>
+        <div id="api-key-status-msg" style="font-size:0.85rem; margin-bottom:10px;"></div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" id="btn-test-backend" class="btn btn-secondary btn-sm">⚡ 測試後端連線</button>
+          <button type="button" id="btn-save-backend-key" class="btn btn-primary btn-sm" style="background:#2563eb; color:#fff;">💾 儲存至本機後端</button>
+        </div>
+      </div>
+    </div>
+  <!-- 全螢幕 AI 多模態深度解析中遮罩 -->
+  <div id="ai-loading-modal" class="modal-overlay hidden" style="z-index: 99999; background: rgba(15,23,42,0.85); backdrop-filter: blur(4px);">
+    <div class="modal-content" style="max-width: 480px; text-align: center; padding: 32px 24px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);">
+      <div class="spinner" style="width: 56px; height: 56px; border: 5px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px;"></div>
+      <h3 style="color: #1e40af; font-size: 1.25rem; margin-bottom: 8px;">🚀 AI 正在深度分析您的機票與行程...</h3>
+      <p style="font-size: 0.88rem; color: #475569; line-height: 1.6; margin-bottom: 16px;">
+        Gemini 旗艦多模態模型正在逐一閱讀您的<strong>機票截圖、PDF門票與住宿訂單</strong>，並精算 10/19~10/27 東京 9 日單向動線。約需 30~60 秒，請稍候！
+      </p>
+      <div id="ai-loading-step-text" style="font-size: 0.85rem; color: #2563eb; font-weight: 700; background: #eff6ff; padding: 8px 12px; border-radius: 6px;">
+        📍 正在提取上野 Mystays 住宿、晴空塔與各日門票憑證...
+      </div>
+    </div>
+  </div>
+
+  <script src="jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
