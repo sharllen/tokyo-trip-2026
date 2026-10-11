@@ -3713,18 +3713,40 @@
 
   function openExportModal() {
     const modal = document.getElementById('modal-data');
-    document.getElementById('data-modal-title').textContent = '📤 匯出旅行代碼 (JSON)';
+    document.getElementById('data-modal-title').textContent = '📤 匯出旅行與記帳代碼 (JSON)';
+    const desc = document.getElementById('data-modal-desc');
+    if (desc) desc.textContent = '包含 9 天行程、所有景點細節、記帳支出明細與親友分帳紀錄。點擊「💾 下載為 .json 檔案」可直接傳到 LINE 給同行夥伴！';
     document.getElementById('data-json-text').value = JSON.stringify(appState, null, 2);
     document.getElementById('btn-confirm-import').classList.add('hidden');
+    const btnDl = document.getElementById('btn-download-json');
+    if (btnDl) btnDl.classList.remove('hidden');
+    const btnFi = document.getElementById('btn-file-import');
+    if (btnFi) btnFi.classList.add('hidden');
     modal.classList.remove('hidden');
   }
 
   function openImportModal() {
     const modal = document.getElementById('modal-data');
-    document.getElementById('data-modal-title').textContent = '📥 匯入旅行代碼 (JSON)';
+    document.getElementById('data-modal-title').textContent = '📥 匯入旅行與記帳代碼 (JSON)';
+    const desc = document.getElementById('data-modal-desc');
+    if (desc) desc.textContent = '可直接貼上 JSON 代碼，或點擊「📂 選取 .json 檔案載入」，即可完整同步所有行程與記帳清單！';
     document.getElementById('data-json-text').value = '';
     document.getElementById('btn-confirm-import').classList.remove('hidden');
+    const btnDl = document.getElementById('btn-download-json');
+    if (btnDl) btnDl.classList.add('hidden');
+    const btnFi = document.getElementById('btn-file-import');
+    if (btnFi) btnFi.classList.remove('hidden');
     modal.classList.remove('hidden');
+  }
+
+  function downloadJsonFile() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `tokyo_trip_${new Date().toISOString().slice(0, 10)}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
   }
 
   function applyImport() {
@@ -3735,9 +3757,16 @@
         appState = parsed;
         saveStateToStorage();
         populateStage1Form();
+        renderStage1PlanPreview();
+        renderStage2Banner();
+        renderStage2DayTabs();
+        renderStage2Timeline();
+        updateUpcomingSpot();
+        renderExpenseSection();
+        renderPackingList();
         setStage(2);
         document.getElementById('modal-data').classList.add('hidden');
-        alert('🎉 行程資料已成功匯入！');
+        alert(`🎉 行程與記帳資料已成功匯入！\n已同步 ${appState.days.length} 天行程與 ${(appState.expenses || []).length} 筆記帳支出明細！`);
       } else {
         alert('⚠️ 資料格式不完整，請確認是否為 Elite Travel 專屬格式！');
       }
@@ -4333,6 +4362,27 @@
       alert('已複製到剪貼簿！');
     };
     document.getElementById('btn-confirm-import').onclick = applyImport;
+    const btnDlJson = document.getElementById('btn-download-json');
+    if (btnDlJson) btnDlJson.onclick = downloadJsonFile;
+    const btnFiJson = document.getElementById('btn-file-import');
+    const inputFiJson = document.getElementById('input-json-file');
+    if (btnFiJson && inputFiJson) {
+      btnFiJson.onclick = () => inputFiJson.click();
+      inputFiJson.onchange = (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            document.getElementById('data-json-text').value = event.target.result;
+            applyImport();
+          } catch (err) {
+            alert('檔案讀取失敗：' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      };
+    }
 
     // 核心規劃與預覽轉入按鈕
     const btnStartPlanning = document.getElementById('btn-start-planning');

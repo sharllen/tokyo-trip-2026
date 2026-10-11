@@ -4,7 +4,7 @@
     "destination": "日本 東京及近郊（上野・橫濱・幕張・成田）",
     "startDate": "2026-10-19",
     "endDate": "2026-10-27",
-    "flightDept": "聯合航空 UA838 | 高雄 KHH 08:00 -> 成田 NRT 13:15 (T1)",
+    "flightDept": "聯合航空 UA838 | 高雄 KHH 09:55 -> 成田 NRT 14:45 (T1)",
     "flightReturn": "聯合航空 UA837 | 成田 NRT 17:45 -> 高雄 KHH 21:15 (T1)",
     "hotelName": "HOTEL MYSTAYS 上野 (HOTEL MYSTAYS Ueno)",
     "hotelAddress": "東京都台東區東上野5-5-13 (+81 3-3842-2461)",
@@ -43,13 +43,13 @@
       "fatigueText": "約 7,500 步 (輕鬆熱身)",
       "fatigueClass": "fatigue-low",
       "isRainMode": false,
-      "logisticsTip": "UA838 航班預計 13:15 抵達 NRT T1，出關領行李約 14:15；搭乘京成 Skyliner 直達上野僅 41 分鐘；嚴格落實落地 2 小時後展開周邊輕鬆動線。",
+      "logisticsTip": "UA838 航班預計 14:45 抵達 NRT T1，出關領行李約 15:45；搭乘京成 Skyliner 直達上野僅 41 分鐘；嚴格落實落地 2 小時後 (約 16:45) 正式展開周邊輕鬆動線。",
       "cultureTip": "日本電車內請保持手機靜音，搭乘電扶梯東京習慣靠左側站立。",
       "safetyTip": "隨身攜帶護照正本以備免稅購物使用，注意末班 Skyliner 與 JR 班次。",
       "sunnySpots": [
         {
           "id": "d1-s1",
-          "time": "13:15",
+          "time": "14:45",
           "period": "下午",
           "title": "抵達成田國際機場第一航廈 (NRT T1)",
           "transport": "搭乘 UA838 順利抵達，辦理入境與領取行李（預估 50 分鐘）",
@@ -60,7 +60,7 @@
         },
         {
           "id": "d1-s2",
-          "time": "15:15",
+          "time": "16:45",
           "period": "下午",
           "title": "入住 HOTEL MYSTAYS 上野・卸下行李休憩",
           "transport": "從京成上野站步行約 7~9 分鐘抵達飯店",
@@ -71,7 +71,7 @@
         },
         {
           "id": "d1-s3",
-          "time": "16:30",
+          "time": "17:30",
           "period": "下午",
           "title": "上野阿美橫丁 (Ameyoko) 活力市集採買",
           "transport": "從飯店步行 6 分鐘直達阿美橫丁入口",
@@ -82,7 +82,7 @@
         },
         {
           "id": "d1-s4",
-          "time": "18:30",
+          "time": "18:45",
           "period": "晚上",
           "title": "晚餐：上野道地拉麵名店（一蘭 / 麵屋武藏 武骨）",
           "transport": "阿美橫丁商圈步行 3 分鐘",
@@ -106,7 +106,7 @@
       "rainSpots": [
         {
           "id": "d1-r1",
-          "time": "16:30",
+          "time": "17:30",
           "period": "下午",
           "title": "上野丸井百貨 (0101) & atre 上野商場 (全室內雨備)",
           "transport": "上野站共構室內連通地下街直達",

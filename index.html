@@ -855,13 +855,18 @@
         <button id="btn-close-data-modal" class="btn-icon" style="color:#000;">✕</button>
       </div>
       <div id="data-modal-body">
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;" id="data-modal-desc">可直接複製代碼或下載成檔案保存／分享給同行夥伴。</p>
         <textarea id="data-json-text" class="form-control" rows="10" style="font-family: monospace; font-size: 0.8rem;"></textarea>
-        <div style="margin-top: 10px; display: flex; gap: 8px;">
+        <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
           <button id="btn-confirm-import" class="btn btn-primary btn-sm">確認載入此資料</button>
-          <button id="btn-copy-json" class="btn btn-secondary btn-sm">複製內容</button>
+          <button id="btn-download-json" class="btn btn-secondary btn-sm" style="background:#f0fdf4; border:1px solid #86efac; color:#166534;">💾 下載為 .json 檔案</button>
+          <button id="btn-file-import" class="btn btn-secondary btn-sm hidden" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8;">📂 選取 .json 檔案載入</button>
+          <input type="file" id="input-json-file" accept=".json" class="hidden">
+          <button id="btn-copy-json" class="btn btn-secondary btn-sm">📋 複製內容</button>
         </div>
       </div>
     </div>
+  </div>
   <!-- Modal: 後端 AI 金鑰管理 -->
   <div id="modal-api-key" class="modal-overlay hidden">
     <div class="modal-content" style="max-width: 520px; border-top: 4px solid #2563eb;">
