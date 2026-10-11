@@ -3277,6 +3277,147 @@
   }
 
   // ==========================================
+  // 智慧親友名稱遷移與記帳連動函式
+  // ==========================================
+  function migrateExpenseMemberNames(oldMembers, newMembers) {
+    if (!newMembers || !newMembers.length) return;
+    const demoNames = ["小明", "小華", "小美", "阿強"];
+    const mapping = {};
+    
+    // 建立舊姓名對應至新姓名之字典
+    if (oldMembers && oldMembers.length) {
+      oldMembers.forEach((oldM, idx) => {
+        mapping[oldM] = newMembers[idx % newMembers.length];
+      });
+    }
+    demoNames.forEach((dName, idx) => {
+      if (!mapping[dName]) {
+        mapping[dName] = newMembers[idx % newMembers.length];
+      }
+    });
+
+    // 1. 同步更新所有支出中的付款人與均攤名單
+    if (appState.expenses && appState.expenses.length) {
+      appState.expenses.forEach(exp => {
+        if (mapping[exp.payer]) {
+          exp.payer = mapping[exp.payer];
+        } else if (!newMembers.includes(exp.payer)) {
+          exp.payer = newMembers[0];
+        }
+
+        if (exp.splitMembers && exp.splitMembers.length) {
+          const mappedSplit = exp.splitMembers.map(m => mapping[m] || m).filter(m => newMembers.includes(m));
+          exp.splitMembers = mappedSplit.length ? Array.from(new Set(mappedSplit)) : [...newMembers];
+        } else {
+          exp.splitMembers = [...newMembers];
+        }
+      });
+    }
+
+    // 2. 同步更新行李清單的指派人
+    if (appState.packingList && appState.packingList.length) {
+      appState.packingList.forEach(item => {
+        if (item.assignee) {
+          Object.keys(mapping).forEach(oldKey => {
+            if (item.assignee.includes(oldKey)) {
+              item.assignee = item.assignee.split(oldKey).join(mapping[oldKey]);
+            }
+          });
+        }
+      });
+    }
+  }
+
+  function updateTripMembersFromInput(newVal) {
+    if (!newVal) return;
+    const parsed = newVal.split(/[,，、]+/).map(s => s.trim()).filter(Boolean);
+    if (!parsed.length) return;
+    const oldMembers = [...(appState.trip.members || [])];
+    appState.trip.members = parsed;
+    migrateExpenseMemberNames(oldMembers, parsed);
+    saveStateToStorage();
+    renderExpenseSection();
+    renderPackingList();
+  }
+
+  function syncMemberNamesToAllExpenses() {
+    let members = appState.trip.members || [];
+    const inputEl = document.getElementById('trip-members');
+    if (inputEl && inputEl.value.trim()) {
+      const parsed = inputEl.value.split(/[,，、]+/).map(s => s.trim()).filter(Boolean);
+      if (parsed.length) {
+        members = parsed;
+        appState.trip.members = members;
+      }
+    }
+    if (!members.length) {
+      alert('請先在步驟 1 填寫同行親友名單！');
+      return;
+    }
+
+    const oldMembers = ["小明", "小華", "小美", "阿強"];
+    migrateExpenseMemberNames(oldMembers, members);
+    saveStateToStorage();
+    renderExpenseSection();
+    renderPackingList();
+    alert(`🎉 親友姓名連動完成！\n已將既有支出與行李清單之姓名，全面對齊為最新親友名單：\n${members.join('、')}`);
+  }
+
+  function clearAllExpenses() {
+    if (confirm('確定要清空所有目前的記帳資料嗎？\n清空後可重新上傳日本發票或手動記錄真實開銷。')) {
+      appState.expenses = [];
+      saveStateToStorage();
+      renderExpenseSection();
+      alert('已清空記帳明細！現在可以乾淨記錄這趟旅程的開銷囉！');
+    }
+  }
+
+  function openEditExpenseModal(idx) {
+    const exp = appState.expenses[idx];
+    if (!exp) return;
+    const modalExp = document.getElementById('modal-expense');
+    const titleEl = document.getElementById('modal-expense-title');
+    if (titleEl) titleEl.textContent = '✏️ 編輯支出明細';
+    const editIdxEl = document.getElementById('exp-edit-index');
+    if (editIdxEl) editIdxEl.value = idx;
+    const submitBtn = document.getElementById('btn-submit-expense');
+    if (submitBtn) submitBtn.textContent = '儲存修改';
+    document.getElementById('exp-title').value = exp.title || '';
+    document.getElementById('exp-amount').value = exp.amount || '';
+    document.getElementById('exp-currency').value = exp.currency || 'JPY';
+    document.getElementById('exp-date').value = exp.date || '';
+    document.getElementById('exp-location').value = exp.location || '';
+    
+    // 填入親友選單
+    const payerSel = document.getElementById('exp-payer');
+    payerSel.innerHTML = '';
+    const members = appState.trip.members && appState.trip.members.length ? appState.trip.members : ["小明", "小華", "小美"];
+    members.forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m;
+      if (m === exp.payer) opt.selected = true;
+      payerSel.appendChild(opt);
+    });
+
+    const splitContainer = document.getElementById('exp-split-checkboxes');
+    splitContainer.innerHTML = '';
+    members.forEach(m => {
+      const label = document.createElement('label');
+      label.style.fontSize = '0.85rem';
+      label.style.cursor = 'pointer';
+      label.style.display = 'inline-flex';
+      label.style.alignItems = 'center';
+      label.style.gap = '4px';
+      const isChecked = (exp.splitMembers && exp.splitMembers.includes(m)) ? 'checked' : '';
+      label.innerHTML = `<input type="checkbox" value="${m}" ${isChecked}> <span>${m}</span>`;
+      splitContainer.appendChild(label);
+    });
+
+    modalExp.classList.remove('hidden');
+  }
+
+  // ==========================================
   // STAGE 3: 費用計算、收據與分帳演算法 (Splitwise)
   // ==========================================
   function renderExpenseSection() {
@@ -3309,12 +3450,16 @@
       // 付款人墊付整筆費用
       if (netBalances[exp.payer] !== undefined) {
         netBalances[exp.payer] += exp.amountTWD;
+      } else if (members.length > 0) {
+        netBalances[members[0]] += exp.amountTWD;
       }
 
       // 分攤人員扣除自身應付份額
       splitters.forEach(person => {
         if (netBalances[person] !== undefined) {
           netBalances[person] -= costPerPerson;
+        } else if (members.length > 0) {
+          netBalances[members[0]] -= costPerPerson;
         }
       });
     });
@@ -3374,9 +3519,16 @@
         <td style="padding: 8px;"><span class="tag" style="background:#e0f2fe; color:#0369a1;">${exp.payer}</span></td>
         <td style="padding: 8px; font-size:0.78rem;">${(exp.splitMembers || []).join(', ')}</td>
         <td style="padding: 8px;">
-          <button class="btn btn-secondary btn-sm" data-delete-idx="${idx}" style="color:var(--danger); padding:2px 6px;">刪除</button>
+          <div style="display:flex; gap:4px; flex-wrap:wrap;">
+            <button class="btn btn-secondary btn-sm" data-edit-idx="${idx}" style="color:var(--primary); padding:2px 6px;">✏️ 編輯</button>
+            <button class="btn btn-secondary btn-sm" data-delete-idx="${idx}" style="color:var(--danger); padding:2px 6px;">🗑️ 刪除</button>
+          </div>
         </td>
       `;
+
+      tr.querySelector('button[data-edit-idx]').onclick = () => {
+        openEditExpenseModal(idx);
+      };
 
       tr.querySelector('button[data-delete-idx]').onclick = () => {
         appState.expenses.splice(idx, 1);
@@ -3816,13 +3968,39 @@
     amountInput.oninput = updateCurrencyCalc;
     currencySelect.onchange = updateCurrencyCalc;
 
-    // 新增支出彈窗
+    // 親友姓名輸入即時連動
+    const tripMembersInput = document.getElementById('trip-members');
+    if (tripMembersInput) {
+      tripMembersInput.onchange = () => {
+        updateTripMembersFromInput(tripMembersInput.value);
+      };
+      tripMembersInput.onblur = () => {
+        updateTripMembersFromInput(tripMembersInput.value);
+      };
+    }
+
+    // 記帳區塊：同步姓名與清空按鈕
+    const btnSyncMembers = document.getElementById('btn-sync-member-names');
+    if (btnSyncMembers) btnSyncMembers.onclick = syncMemberNamesToAllExpenses;
+
+    const btnClearExp = document.getElementById('btn-clear-demo-expenses');
+    if (btnClearExp) btnClearExp.onclick = clearAllExpenses;
+
+    // 新增/編輯支出彈窗
     const modalExp = document.getElementById('modal-expense');
     document.getElementById('btn-show-add-expense').onclick = () => {
+      const titleEl = document.getElementById('modal-expense-title');
+      if (titleEl) titleEl.textContent = '➕ 記錄新花費';
+      const editIdxEl = document.getElementById('exp-edit-index');
+      if (editIdxEl) editIdxEl.value = '-1';
+      const submitBtn = document.getElementById('btn-submit-expense');
+      if (submitBtn) submitBtn.textContent = '儲存這筆支出';
+      document.getElementById('form-add-expense').reset();
+
       // 填入親友選單
       const payerSel = document.getElementById('exp-payer');
       payerSel.innerHTML = '';
-      const members = appState.trip.members || ["小明", "小華", "小美"];
+      const members = appState.trip.members && appState.trip.members.length ? appState.trip.members : ["小明", "小華", "小美"];
       members.forEach(m => {
         const opt = document.createElement('option');
         opt.value = m;
@@ -3851,6 +4029,7 @@
 
     document.getElementById('form-add-expense').onsubmit = (e) => {
       e.preventDefault();
+      const editIdx = parseInt(document.getElementById('exp-edit-index').value, 10);
       const title = document.getElementById('exp-title').value;
       const amount = parseFloat(document.getElementById('exp-amount').value) || 0;
       const currency = document.getElementById('exp-currency').value;
@@ -3864,8 +4043,7 @@
       });
 
       const rate = EXCHANGE_RATES[currency] || 1.0;
-      appState.expenses.push({
-        id: "exp-" + Date.now(),
+      const expData = {
         title,
         amount,
         currency,
@@ -3874,7 +4052,19 @@
         location,
         payer,
         splitMembers: splitChecked.length ? splitChecked : [payer]
-      });
+      };
+
+      if (editIdx >= 0 && appState.expenses[editIdx]) {
+        appState.expenses[editIdx] = {
+          ...appState.expenses[editIdx],
+          ...expData
+        };
+      } else {
+        appState.expenses.push({
+          id: "exp-" + Date.now(),
+          ...expData
+        });
+      }
 
       saveStateToStorage();
       renderExpenseSection();
@@ -4553,6 +4743,15 @@
   // 初始化入口
   function init() {
     loadStateFromStorage();
+    // 自動檢測並對齊姓名：若親友名單已修改為非示範名單，但記帳中仍殘留「小明/小華/小美」，自動智慧連動
+    if (appState.trip && appState.trip.members && appState.trip.members.length) {
+      const hasOldDemoPayer = (appState.expenses || []).some(e => ["小明", "小華", "小美", "阿強"].includes(e.payer));
+      const userHasNoDemoMember = !appState.trip.members.includes("小明");
+      if (hasOldDemoPayer && userHasNoDemoMember) {
+        migrateExpenseMemberNames(["小明", "小華", "小美", "阿強"], appState.trip.members);
+        saveStateToStorage();
+      }
+    }
     populateStage1Form();
     initEvents();
     renderPackingList();

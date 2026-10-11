@@ -557,7 +557,11 @@
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">💰 旅程費用管理與親友分帳 (Splitwise 模組)</h2>
-          <button id="btn-show-add-expense" class="btn btn-primary btn-sm">➕ 記錄新支出</button>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <button type="button" id="btn-sync-member-names" class="btn btn-secondary btn-sm" title="將既有帳目中的舊姓名智慧對齊為最新同行親友" style="background:#f0fdf4; border:1px solid #86efac; color:#166534; font-weight:600;">🔄 連動最新親友姓名</button>
+            <button type="button" id="btn-clear-demo-expenses" class="btn btn-secondary btn-sm" title="清空所有記帳以開始記錄真實開銷" style="color:#b91c1c; border:1px solid #fca5a5;">🗑️ 清空範例帳目</button>
+            <button type="button" id="btn-show-add-expense" class="btn btn-primary btn-sm">➕ 記錄新支出</button>
+          </div>
         </div>
 
         <!-- 費用統計摘要 -->
@@ -793,14 +797,15 @@
     </div>
   </div>
 
-  <!-- 新增支出 Modal 彈窗 -->
+  <!-- 新增/編輯支出 Modal 彈窗 -->
   <div id="modal-expense" class="modal-overlay hidden">
     <div class="modal-content">
       <div class="card-header">
-        <h3 class="card-title">➕ 記錄新花費</h3>
+        <h3 class="card-title" id="modal-expense-title">➕ 記錄新花費</h3>
         <button id="btn-close-expense-modal" class="btn-icon" style="color:#000;">✕</button>
       </div>
       <form id="form-add-expense">
+        <input type="hidden" id="exp-edit-index" value="-1">
         <div class="form-group">
           <label class="form-label" for="exp-title">支出品項名稱</label>
           <input type="text" id="exp-title" class="form-control" placeholder="例如：敘敘苑午間燒肉套餐" required>
@@ -842,7 +847,7 @@
             <!-- 親友名單核取方塊 -->
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">儲存這筆支出</button>
+        <button type="submit" id="btn-submit-expense" class="btn btn-primary btn-block">儲存這筆支出</button>
       </form>
     </div>
   </div>
