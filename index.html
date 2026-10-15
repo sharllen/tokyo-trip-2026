@@ -16,6 +16,13 @@
         <span class="brand-badge">PRO v1.4</span>
       </div>
       <div class="header-actions">
+        <!-- 字體大小調整 (小 / 中 / 大) -->
+        <div class="font-size-switcher" title="點擊調整網頁字體大小（大/中/小）">
+          <span class="font-label">字體:</span>
+          <button type="button" class="btn-font-size" data-size="sm" title="小字體 (14px)">小</button>
+          <button type="button" class="btn-font-size active" data-size="md" title="標準字體 (16px)">中</button>
+          <button type="button" class="btn-font-size" data-size="lg" title="大字體 (18.5px 舒適清晰)">大</button>
+        </div>
         <button id="btn-open-api-key" class="btn-icon" style="background:#2563eb; border-color:#1d4ed8; font-weight:700;" title="本機後端 AI 安全金鑰">🔑 AI後端: <span id="backend-status-indicator">⚪ 連線中</span></button>
         <button id="btn-open-packing" class="btn-icon btn-icon-accent" title="行前行李打包清單">🎒 行李清單</button>
         <button id="btn-open-emergency" class="btn-icon" style="background:rgba(239,68,68,0.85); border-color:#dc2626;" title="海外急難救助">🆘 急難備忘</button>
@@ -58,199 +65,257 @@
         </button>
       </div>
 
+      <!-- 規劃欄位收合/展開快捷工具列 -->
+      <div class="planning-toolbar">
+        <div class="planning-toolbar-left">
+          <span class="planning-toolbar-title">📋 規劃表單步驟欄位</span>
+          <span class="planning-toolbar-sub">(點擊標題可收合/展開欄位)</span>
+        </div>
+        <div class="planning-toolbar-right">
+          <button type="button" id="btn-collapse-all-steps" class="btn btn-secondary btn-sm" title="收合所有步驟，只保留精簡摘要">
+            ➖ 全部收合
+          </button>
+          <button type="button" id="btn-expand-all-steps" class="btn btn-secondary btn-sm" title="展開所有步驟以便編輯">
+            ➕ 全部展開
+          </button>
+        </div>
+      </div>
+
       <form id="plan-form">
         <!-- 步驟 1: 旅程基本資訊 -->
-        <div class="step-section">
-          <div class="step-header">
-            <div class="step-number">1</div>
-            <div class="step-title">旅程基本資訊 (Trip Basics)</div>
-          </div>
-          <div class="form-row form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="trip-name">旅遊名稱</label>
-              <input type="text" id="trip-name" class="form-control" placeholder="例如：2026 東京初秋美食與文化漫遊" required>
+        <div class="step-section" id="step-section-1">
+          <div class="step-header" data-toggle-step="1">
+            <div class="step-header-left">
+              <div class="step-number">1</div>
+              <div class="step-title">旅程基本資訊 (Trip Basics)</div>
+              <span class="step-summary-pill" id="step-1-summary">日本 東京 ｜ 2026-10-19 ~ 10-27</span>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="trip-destination">目的地（國家 / 城市）</label>
-              <input type="text" id="trip-destination" class="form-control" placeholder="例如：日本 東京" required>
+            <div class="step-header-right">
+              <span class="step-toggle-btn">
+                <span class="step-toggle-text">收合</span>
+                <span class="step-toggle-arrow">▲</span>
+              </span>
             </div>
           </div>
+          <div class="step-body" id="step-1-body">
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="trip-name">旅遊名稱</label>
+                <input type="text" id="trip-name" class="form-control" placeholder="例如：2026 東京初秋美食與文化漫遊" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="trip-destination">目的地（國家 / 城市）</label>
+                <input type="text" id="trip-destination" class="form-control" placeholder="例如：日本 東京" required>
+              </div>
+            </div>
 
-          <div class="form-row form-row-3">
-            <div class="form-group">
-              <label class="form-label" for="trip-start-date">出發日期</label>
-              <input type="date" id="trip-start-date" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="trip-end-date">回程日期</label>
-              <input type="date" id="trip-end-date" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="trip-members">同行親友名單（以逗號分隔）</label>
-              <input type="text" id="trip-members" class="form-control" placeholder="小明, 小華, 小美" value="小明, 小華, 小美">
+            <div class="form-row form-row-3">
+              <div class="form-group">
+                <label class="form-label" for="trip-start-date">出發日期</label>
+                <input type="date" id="trip-start-date" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="trip-end-date">回程日期</label>
+                <input type="date" id="trip-end-date" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="trip-members">同行親友名單（以逗號分隔）</label>
+                <input type="text" id="trip-members" class="form-control" placeholder="小明, 小華, 小美" value="小明, 小華, 小美">
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 步驟 2: 航班與住宿憑證 -->
-        <div class="step-section">
-          <div class="step-header">
-            <div class="step-number">2</div>
-            <div class="step-title">航班與住宿憑證 (Flights & Hotel)</div>
-          </div>
-          <div class="form-row form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="flight-dept">🛫 去程航班資訊</label>
-              <input type="text" id="flight-dept" class="form-control" placeholder="長榮 BR198 | TPE 08:50 -> NRT 13:15 (T1 Gate 24)">
-              <small style="color:var(--text-muted); font-size:0.75rem;">顧問原則：首日落地後約 2 小時展開周邊動線</small>
+        <div class="step-section" id="step-section-2">
+          <div class="step-header" data-toggle-step="2">
+            <div class="step-header-left">
+              <div class="step-number">2</div>
+              <div class="step-title">航班與住宿憑證 (Flights & Hotel)</div>
+              <span class="step-summary-pill" id="step-2-summary">長榮 BR198 ｜ 三井花園飯店</span>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="flight-return">🛬 回程航班資訊</label>
-              <input type="text" id="flight-return" class="form-control" placeholder="長榮 BR197 | NRT 14:15 -> TPE 17:05 (T1 Gate 32)">
-              <small style="color:var(--text-muted); font-size:0.75rem;">顧問原則：國際線嚴格提前 3.5 小時抵達機場</small>
+            <div class="step-header-right">
+              <span class="step-toggle-btn">
+                <span class="step-toggle-text">收合</span>
+                <span class="step-toggle-arrow">▲</span>
+              </span>
             </div>
           </div>
-          <div class="form-row form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="hotel-name">🏨 住宿飯店名稱</label>
-              <input type="text" id="hotel-name" class="form-control" placeholder="例如：三井花園飯店 汐留義大利街">
+          <div class="step-body" id="step-2-body">
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="flight-dept">🛫 去程航班資訊</label>
+                <input type="text" id="flight-dept" class="form-control" placeholder="長榮 BR198 | TPE 08:50 -> NRT 13:15 (T1 Gate 24)">
+                <small style="color:var(--text-muted); font-size:0.75rem;">顧問原則：首日落地後約 2 小時展開周邊動線</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="flight-return">🛬 回程航班資訊</label>
+                <input type="text" id="flight-return" class="form-control" placeholder="長榮 BR197 | NRT 14:15 -> TPE 17:05 (T1 Gate 32)">
+                <small style="color:var(--text-muted); font-size:0.75rem;">顧問原則：國際線嚴格提前 3.5 小時抵達機場</small>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="hotel-address">📍 飯店地址與電話（司機指引）</label>
-              <input type="text" id="hotel-address" class="form-control" placeholder="東京都港區東新橋2-14-24 (+81 3-3431-1131)">
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="hotel-name">🏨 住宿飯店名稱</label>
+                <input type="text" id="hotel-name" class="form-control" placeholder="例如：三井花園飯店 汐留義大利街">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="hotel-address">📍 飯店地址與電話（司機指引）</label>
+                <input type="text" id="hotel-address" class="form-control" placeholder="東京都港區東新橋2-14-24 (+81 3-3431-1131)">
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 步驟 3: 旅程主題、節奏與同行成員 (實用主流旅遊 APP 規格) -->
-        <div class="step-section">
-          <div class="step-header">
-            <div class="step-number">3</div>
-            <div class="step-title">旅程主題、節奏與同行成員 (Themes & Pace)</div>
-          </div>
-
-          <!-- 旅程主題（可複選） -->
-          <div class="form-group">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <label class="form-label" style="margin-bottom:0;">🎯 旅程主要主題與偏好（可多選）</label>
-              <div class="custom-chip-adder">
-                <input type="text" id="input-new-theme" placeholder="+ 自訂主題">
-                <button type="button" id="btn-add-theme" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
-              </div>
+        <div class="step-section" id="step-section-3">
+          <div class="step-header" data-toggle-step="3">
+            <div class="step-header-left">
+              <div class="step-number">3</div>
+              <div class="step-title">旅程主題、節奏與同行成員 (Themes & Pace)</div>
+              <span class="step-summary-pill" id="step-3-summary">美食探索, 購物逛街 ｜ 充實均衡</span>
             </div>
-            <div class="chip-group" id="chip-group-themes">
-              <button type="button" class="chip-btn active" data-val="美食探索">🍣 美食探索 (必吃老店/在地料理)</button>
-              <button type="button" class="chip-btn active" data-val="購物逛街">🛍️ 購物逛街 (百貨商圈/藥妝免稅)</button>
-              <button type="button" class="chip-btn" data-val="歷史文化">🏮 歷史文化 (神社古蹟/博物館)</button>
-              <button type="button" class="chip-btn" data-val="自然景觀">🏞️ 自然景觀 (公園庭園/海景夕陽)</button>
-              <button type="button" class="chip-btn" data-val="打卡地標">📸 打卡地標 (高空展望/人氣地標)</button>
-              <button type="button" class="chip-btn" data-val="溫泉放鬆">💆 溫泉放鬆 (悠閒漫步/景觀咖啡)</button>
+            <div class="step-header-right">
+              <span class="step-toggle-btn">
+                <span class="step-toggle-text">收合</span>
+                <span class="step-toggle-arrow">▲</span>
+              </span>
             </div>
-            <input type="hidden" id="travel-themes" value="美食探索, 購物逛街">
           </div>
-
-          <!-- 每日步調節奏 -->
-          <div class="form-group">
-            <label class="form-label">⏱️ 行程步調節奏 (Trip Pace)</label>
-            <div class="chip-group" id="chip-group-pace">
-              <button type="button" class="chip-btn" data-val="悠閒慢活">☕ 悠閒慢活 (每日 2~3 個點，充裕時間放空不趕場)</button>
-              <button type="button" class="chip-btn active" data-val="充實均衡">⚖️ 充實均衡 (每日 4~5 個點，動線經典順暢)</button>
-              <button type="button" class="chip-btn" data-val="緊湊豐富">🚀 緊湊豐富 (每日 6+ 個點，高效率踩點探索)</button>
-            </div>
-            <input type="hidden" id="travel-pace" value="充實均衡">
-          </div>
-
-          <!-- 同行成員型態 -->
-          <div class="form-group">
-            <label class="form-label">👥 同行成員型態 (Companions)</label>
-            <div class="chip-group" id="chip-group-companions">
-              <button type="button" class="chip-btn active" data-val="親友同行">👫 親友同行 (兼顧各自喜好、分帳便利)</button>
-              <button type="button" class="chip-btn" data-val="情侶伴侶">🌹 情侶伴侶 (氣氛餐廳、夜景漫步、步調浪漫)</button>
-              <button type="button" class="chip-btn" data-val="親子家庭">👨‍👩‍👧 親子家庭 (推車友善、少排隊、景點安全)</button>
-              <button type="button" class="chip-btn" data-val="長輩同遊">👵 長輩同遊 (少樓梯、步程平緩、定點休閒)</button>
-              <button type="button" class="chip-btn" data-val="個人獨旅">🎒 個人獨旅 (高自由度、隨興彈性、安全優先)</button>
-            </div>
-            <input type="hidden" id="travel-companions" value="親友同行">
-          </div>
-
-          <!-- 漸進式展開：進階偏好設定 (交通方式、餐點喜好、預算等級) -->
-          <button type="button" id="btn-toggle-advanced-prefs" class="advanced-toggle-btn">
-            <span>⚙️ 展開進階旅遊偏好（交通方式、餐點喜好、每日預算）</span>
-            <span id="advanced-toggle-arrow">▼ 點擊展開</span>
-          </button>
-
-          <div id="advanced-prefs-container" class="hidden" style="background:#f8fafc; border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; margin-bottom:14px;">
-            <!-- 交通偏好 -->
+          <div class="step-body" id="step-3-body">
+            <!-- 旅程主題（可複選） -->
             <div class="form-group">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <label class="form-label" style="margin-bottom:0;">🚗 主要交通移動方式偏好</label>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label class="form-label" style="margin-bottom:0;">🎯 旅程主要主題與偏好（可多選）</label>
                 <div class="custom-chip-adder">
-                  <input type="text" id="input-new-transport" placeholder="+ 自訂交通">
-                  <button type="button" id="btn-add-transport" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+                  <input type="text" id="input-new-theme" placeholder="+ 自訂主題">
+                  <button type="button" id="btn-add-theme" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
                 </div>
               </div>
-              <div class="chip-group" id="chip-group-transport">
-                <button type="button" class="chip-btn active" data-val="大眾捷運鐵路">🚇 大眾捷運/鐵路電車 (省錢準時)</button>
-                <button type="button" class="chip-btn" data-val="租車自駕">🚗 租車自駕 (行程自由、近郊首選)</button>
-                <button type="button" class="chip-btn" data-val="計程車包車">🚕 計程車/包車 (長輩小孩省力輕鬆)</button>
-                <button type="button" class="chip-btn" data-val="深度步行漫步">🚶 深度步行慢遊 (探索巷弄小店)</button>
+              <div class="chip-group" id="chip-group-themes">
+                <button type="button" class="chip-btn active" data-val="美食探索">🍣 美食探索 (必吃老店/在地料理)</button>
+                <button type="button" class="chip-btn active" data-val="購物逛街">🛍️ 購物逛街 (百貨商圈/藥妝免稅)</button>
+                <button type="button" class="chip-btn" data-val="歷史文化">🏮 歷史文化 (神社古蹟/博物館)</button>
+                <button type="button" class="chip-btn" data-val="自然景觀">🏞️ 自然景觀 (公園庭園/海景夕陽)</button>
+                <button type="button" class="chip-btn" data-val="打卡地標">📸 打卡地標 (高空展望/人氣地標)</button>
+                <button type="button" class="chip-btn" data-val="溫泉放鬆">💆 溫泉放鬆 (悠閒漫步/景觀咖啡)</button>
               </div>
-              <input type="hidden" id="travel-transport" value="大眾捷運鐵路">
+              <input type="hidden" id="travel-themes" value="美食探索, 購物逛街">
             </div>
 
-            <!-- 餐點美食喜好 -->
+            <!-- 每日步調節奏 -->
             <div class="form-group">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                <label class="form-label" style="margin-bottom:0;">🍽️ 餐點美食風格偏好（可多選）</label>
-                <div class="custom-chip-adder">
-                  <input type="text" id="input-new-dining" placeholder="+ 自訂餐點">
-                  <button type="button" id="btn-add-dining" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+              <label class="form-label">⏱️ 行程步調節奏 (Trip Pace)</label>
+              <div class="chip-group" id="chip-group-pace">
+                <button type="button" class="chip-btn" data-val="悠閒慢活">☕ 悠閒慢活 (每日 2~3 個點，充裕時間放空不趕場)</button>
+                <button type="button" class="chip-btn active" data-val="充實均衡">⚖️ 充實均衡 (每日 4~5 個點，動線經典順暢)</button>
+                <button type="button" class="chip-btn" data-val="緊湊豐富">🚀 緊湊豐富 (每日 6+ 個點，高效率踩點探索)</button>
+              </div>
+              <input type="hidden" id="travel-pace" value="充實均衡">
+            </div>
+
+            <!-- 同行成員型態 -->
+            <div class="form-group">
+              <label class="form-label">👥 同行成員型態 (Companions)</label>
+              <div class="chip-group" id="chip-group-companions">
+                <button type="button" class="chip-btn active" data-val="親友同行">👫 親友同行 (兼顧各自喜好、分帳便利)</button>
+                <button type="button" class="chip-btn" data-val="情侶伴侶">🌹 情侶伴侶 (氣氛餐廳、夜景漫步、步調浪漫)</button>
+                <button type="button" class="chip-btn" data-val="親子家庭">👨‍👩‍👧 親子家庭 (推車友善、少排隊、景點安全)</button>
+                <button type="button" class="chip-btn" data-val="長輩同遊">👵 長輩同遊 (少樓梯、步程平緩、定點休閒)</button>
+                <button type="button" class="chip-btn" data-val="個人獨旅">🎒 個人獨旅 (高自由度、隨興彈性、安全優先)</button>
+              </div>
+              <input type="hidden" id="travel-companions" value="親友同行">
+            </div>
+
+            <!-- 漸進式展開：進階偏好設定 (交通方式、餐點喜好、預算等級) -->
+            <button type="button" id="btn-toggle-advanced-prefs" class="advanced-toggle-btn">
+              <span>⚙️ 展開進階旅遊偏好（交通方式、餐點喜好、每日預算）</span>
+              <span id="advanced-toggle-arrow">▼ 點擊展開</span>
+            </button>
+
+            <div id="advanced-prefs-container" class="hidden" style="background:#f8fafc; border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; margin-bottom:14px;">
+              <!-- 交通偏好 -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                  <label class="form-label" style="margin-bottom:0;">🚗 主要交通移動方式偏好</label>
+                  <div class="custom-chip-adder">
+                    <input type="text" id="input-new-transport" placeholder="+ 自訂交通">
+                    <button type="button" id="btn-add-transport" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+                  </div>
                 </div>
+                <div class="chip-group" id="chip-group-transport">
+                  <button type="button" class="chip-btn active" data-val="大眾捷運鐵路">🚇 大眾捷運/鐵路電車 (省錢準時)</button>
+                  <button type="button" class="chip-btn" data-val="租車自駕">🚗 租車自駕 (行程自由、近郊首選)</button>
+                  <button type="button" class="chip-btn" data-val="計程車包車">🚕 計程車/包車 (長輩小孩省力輕鬆)</button>
+                  <button type="button" class="chip-btn" data-val="深度步行漫步">🚶 深度步行慢遊 (探索巷弄小店)</button>
+                </div>
+                <input type="hidden" id="travel-transport" value="大眾捷運鐵路">
               </div>
-              <div class="chip-group" id="chip-group-dining">
-                <button type="button" class="chip-btn active" data-val="在地排隊名店">🍣 在地特色排隊名店</button>
-                <button type="button" class="chip-btn active" data-val="頂級和牛燒肉">🥩 頂級和牛 / 燒肉壽喜燒</button>
-                <button type="button" class="chip-btn" data-val="街頭庶民小吃">🍜 街頭小吃與屋台市集</button>
-                <button type="button" class="chip-btn" data-val="景觀甜點咖啡">☕ 景觀咖啡廳與當季甜點</button>
-                <button type="button" class="chip-btn" data-val="預約制星級料理">🍱 預約制名店 / 米其林</button>
-                <button type="button" class="chip-btn" data-val="蔬食素食友善">🥗 蔬食素食 / 清真友善</button>
+
+              <!-- 餐點美食喜好 -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                  <label class="form-label" style="margin-bottom:0;">🍽️ 餐點美食風格偏好（可多選）</label>
+                  <div class="custom-chip-adder">
+                    <input type="text" id="input-new-dining" placeholder="+ 自訂餐點">
+                    <button type="button" id="btn-add-dining" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;">新增</button>
+                  </div>
+                </div>
+                <div class="chip-group" id="chip-group-dining">
+                  <button type="button" class="chip-btn active" data-val="在地排隊名店">🍣 在地特色排隊名店</button>
+                  <button type="button" class="chip-btn active" data-val="頂級和牛燒肉">🥩 頂級和牛 / 燒肉壽喜燒</button>
+                  <button type="button" class="chip-btn" data-val="街頭庶民小吃">🍜 街頭小吃與屋台市集</button>
+                  <button type="button" class="chip-btn" data-val="景觀甜點咖啡">☕ 景觀咖啡廳與當季甜點</button>
+                  <button type="button" class="chip-btn" data-val="預約制星級料理">🍱 預約制名店 / 米其林</button>
+                  <button type="button" class="chip-btn" data-val="蔬食素食友善">🥗 蔬食素食 / 清真友善</button>
+                </div>
+                <input type="hidden" id="travel-dining" value="在地排隊名店, 頂級和牛燒肉">
               </div>
-              <input type="hidden" id="travel-dining" value="在地排隊名店, 頂級和牛燒肉">
+
+              <!-- 預算區間 -->
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">💵 預期每日預算等級</label>
+                <div class="chip-group" id="chip-group-budget">
+                  <button type="button" class="chip-btn" data-val="經濟小資">💰 經濟小資 ($)</button>
+                  <button type="button" class="chip-btn active" data-val="充實適中">💳 充實適中 ($$)</button>
+                  <button type="button" class="chip-btn" data-val="奢華享受">💎 奢華享受 ($$$)</button>
+                </div>
+                <input type="hidden" id="travel-budget" value="充實適中">
+              </div>
             </div>
 
-            <!-- 預算區間 -->
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label">💵 預期每日預算等級</label>
-              <div class="chip-group" id="chip-group-budget">
-                <button type="button" class="chip-btn" data-val="經濟小資">💰 經濟小資 ($)</button>
-                <button type="button" class="chip-btn active" data-val="充實適中">💳 充實適中 ($$)</button>
-                <button type="button" class="chip-btn" data-val="奢華享受">💎 奢華享受 ($$$)</button>
+            <div class="form-row form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="must-go-list">⭐ 願望清單（必去景點/美食，以逗號分隔）</label>
+                <input type="text" id="must-go-list" class="form-control" placeholder="淺草寺, SHIBUYA SKY, 敘敘苑燒肉, 築地場外市場">
               </div>
-              <input type="hidden" id="travel-budget" value="充實適中">
-            </div>
-          </div>
-
-          <div class="form-row form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="must-go-list">⭐ 願望清單（必去景點/美食，以逗號分隔）</label>
-              <input type="text" id="must-go-list" class="form-control" placeholder="淺草寺, SHIBUYA SKY, 敘敘苑燒肉, 築地場外市場">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="must-avoid-list">🚫 特殊需求與避雷限制（飲食禁忌/避開項）</label>
-              <input type="text" id="must-avoid-list" class="form-control" placeholder="不吃生食, 避免需排隊 2 小時以上店家">
+              <div class="form-group">
+                <label class="form-label" for="must-avoid-list">🚫 特殊需求與避雷限制（飲食禁忌/避開項）</label>
+                <input type="text" id="must-avoid-list" class="form-control" placeholder="不吃生食, 避免需排隊 2 小時以上店家">
+              </div>
             </div>
           </div>
         </div>
 
         <!-- 步驟 4: 多管道原有行程與檔案上傳中心 (核心優化) -->
-        <div class="step-section">
-          <div class="step-header">
-            <div class="step-number">4</div>
-            <div class="step-title">原有行程匯入中心 (Multi-Source Ingest Hub)</div>
+        <div class="step-section collapsed" id="step-section-4">
+          <div class="step-header" data-toggle-step="4">
+            <div class="step-header-left">
+              <div class="step-number">4</div>
+              <div class="step-title">原有行程匯入中心 (Multi-Source Ingest Hub)</div>
+              <span class="step-summary-pill" id="step-4-summary">文件 / 照片 / 雲端硬碟 / 筆記 (點擊展開上傳)</span>
+            </div>
+            <div class="step-header-right">
+              <span class="step-toggle-btn">
+                <span class="step-toggle-text">展開</span>
+                <span class="step-toggle-arrow">▼</span>
+              </span>
+            </div>
           </div>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">
-            您可以透過<strong>文件上傳、機票照片截圖、Google 雲端硬碟連結</strong>或<strong>筆記文字</strong>，AI 會自動識別並整合至行程：
-          </p>
+          <div class="step-body" id="step-4-body">
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">
+              您可以透過<strong>文件上傳、機票照片截圖、Google 雲端硬碟連結</strong>或<strong>筆記文字</strong>，AI 會自動識別並整合至行程：
+            </p>
 
           <!-- 匯入方式分頁標籤 -->
           <div class="source-tab-bar">
@@ -368,6 +433,7 @@
             <textarea id="custom-input-text" class="form-control" rows="4" placeholder="可以直接貼上您想去的額外景點、社群推薦連結、航班代碼或每日自訂備忘..."></textarea>
           </div>
         </div>
+      </div>
 
         <!-- 步驟 5: 智慧行程規劃與即時預覽 (核心規劃引擎) -->
         <div class="step-section" id="planning-control-section" style="border: 2px solid #3b82f6; background: #f8fafc;">

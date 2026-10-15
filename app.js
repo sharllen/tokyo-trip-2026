@@ -1838,6 +1838,12 @@
   // ==========================================
   function setStage(stageNum) {
     currentStage = parseInt(stageNum, 10);
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('elite_travel_current_stage', currentStage.toString());
+      }
+    } catch (e) {}
+
     document.querySelectorAll('.stage-btn').forEach(btn => {
       btn.classList.toggle('active', parseInt(btn.dataset.stage, 10) === currentStage);
     });
@@ -4718,11 +4724,157 @@
     });
   }
 
+  // ==========================================
+  // 字體大小控制 (大/中/小)
+  // ==========================================
+  function initFontSizeControl() {
+    if (typeof document === 'undefined') return;
+    let savedSize = 'md';
+    try {
+      if (typeof localStorage !== 'undefined') {
+        savedSize = localStorage.getItem('elite_travel_font_size') || 'md';
+      }
+    } catch (e) {}
+
+    function applyFontSize(size) {
+      if (document.documentElement && document.documentElement.classList) {
+        document.documentElement.classList.remove('font-size-sm', 'font-size-md', 'font-size-lg');
+        document.documentElement.classList.add(`font-size-${size}`);
+      }
+      document.querySelectorAll('.btn-font-size').forEach(btn => {
+        if (btn.classList) {
+          btn.classList.toggle('active', btn.dataset.size === size);
+        }
+      });
+      try {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('elite_travel_font_size', size);
+        }
+      } catch (e) {}
+    }
+
+    applyFontSize(savedSize);
+
+    document.querySelectorAll('.btn-font-size').forEach(btn => {
+      btn.onclick = () => {
+        applyFontSize(btn.dataset.size);
+      };
+    });
+  }
+
+  // ==========================================
+  // 旅遊規劃表單步驟收合/展開 (Accordion)
+  // ==========================================
+  function initStepAccordion() {
+    if (typeof document === 'undefined') return;
+
+    function updateStepSummaries() {
+      // Step 1 summary
+      const tripDest = document.getElementById('trip-destination') ? document.getElementById('trip-destination').value : '';
+      const tripStart = document.getElementById('trip-start-date') ? document.getElementById('trip-start-date').value : '';
+      const tripEnd = document.getElementById('trip-end-date') ? document.getElementById('trip-end-date').value : '';
+      const tripMembers = document.getElementById('trip-members') ? document.getElementById('trip-members').value : '';
+      const s1 = document.getElementById('step-1-summary');
+      if (s1) {
+        if (tripDest || tripStart) {
+          s1.textContent = `${tripDest || '目的地未定'} ｜ ${tripStart ? tripStart.slice(5) : ''}~${tripEnd ? tripEnd.slice(5) : ''} ｜ ${tripMembers || '親友'}`;
+        } else {
+          s1.textContent = '目的地、出發日期與同行親友';
+        }
+      }
+
+      // Step 2 summary
+      const flightDept = document.getElementById('flight-dept') ? document.getElementById('flight-dept').value : '';
+      const hotelName = document.getElementById('hotel-name') ? document.getElementById('hotel-name').value : '';
+      const s2 = document.getElementById('step-2-summary');
+      if (s2) {
+        if (flightDept || hotelName) {
+          const fShort = flightDept ? flightDept.split('|')[0].trim() : '';
+          s2.textContent = `${fShort || '航班已設'} ｜ ${hotelName || '飯店已設定'}`;
+        } else {
+          s2.textContent = '航班與住宿憑證';
+        }
+      }
+
+      // Step 3 summary
+      const themes = document.getElementById('travel-themes') ? document.getElementById('travel-themes').value : '';
+      const pace = document.getElementById('travel-pace') ? document.getElementById('travel-pace').value : '';
+      const s3 = document.getElementById('step-3-summary');
+      if (s3) {
+        s3.textContent = `${themes || '美食/購物'} ｜ ${pace || '充實均衡'}`;
+      }
+    }
+
+    // Toggle single step
+    document.querySelectorAll('.step-header[data-toggle-step]').forEach(header => {
+      header.onclick = (e) => {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON')) return;
+        const stepNum = header.dataset.toggleStep;
+        const section = document.getElementById(`step-section-${stepNum}`);
+        if (!section || !section.classList) return;
+        const isCollapsed = section.classList.toggle('collapsed');
+        const arrow = header.querySelector('.step-toggle-arrow');
+        const text = header.querySelector('.step-toggle-text');
+        if (arrow) arrow.textContent = isCollapsed ? '▼' : '▲';
+        if (text) text.textContent = isCollapsed ? '展開' : '收合';
+      };
+    });
+
+    // Expand all / Collapse all buttons
+    const btnExpandAll = document.getElementById('btn-expand-all-steps');
+    if (btnExpandAll) {
+      btnExpandAll.onclick = () => {
+        document.querySelectorAll('.step-section[id^="step-section-"]').forEach(sec => {
+          if (sec.classList) sec.classList.remove('collapsed');
+          const arrow = sec.querySelector('.step-toggle-arrow');
+          const text = sec.querySelector('.step-toggle-text');
+          if (arrow) arrow.textContent = '▲';
+          if (text) text.textContent = '收合';
+        });
+      };
+    }
+
+    const btnCollapseAll = document.getElementById('btn-collapse-all-steps');
+    if (btnCollapseAll) {
+      btnCollapseAll.onclick = () => {
+        document.querySelectorAll('.step-section[id^="step-section-"]').forEach(sec => {
+          if (sec.classList) sec.classList.add('collapsed');
+          const arrow = sec.querySelector('.step-toggle-arrow');
+          const text = sec.querySelector('.step-toggle-text');
+          if (arrow) arrow.textContent = '▼';
+          if (text) text.textContent = '展開';
+        });
+      };
+    }
+
+    // Call updateStepSummaries initially and listen to inputs
+    updateStepSummaries();
+    ['trip-destination', 'trip-start-date', 'trip-end-date', 'trip-members', 'flight-dept', 'hotel-name'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.oninput = updateStepSummaries;
+        el.onchange = updateStepSummaries;
+      }
+    });
+  }
+
   async function checkBackendStatus() {
+    if (typeof process !== 'undefined') return;
     const indicator = document.getElementById('backend-status-indicator');
     if (!indicator) return;
+
+    let isDone = false;
+    const slowTimer = setTimeout(() => {
+      if (!isDone) {
+        indicator.textContent = '☕ 喚醒中...';
+        indicator.style.color = '#fde047';
+      }
+    }, 2500);
+
     try {
       const res = await fetch(getBackendUrl('/api/status'));
+      isDone = true;
+      clearTimeout(slowTimer);
       if (res.ok) {
         const data = await res.json();
         if (data.has_key) {
@@ -4736,6 +4888,8 @@
         indicator.textContent = '⚪ 離線模式';
       }
     } catch (e) {
+      isDone = true;
+      clearTimeout(slowTimer);
       indicator.textContent = '⚪ 離線模式';
     }
   }
@@ -4754,11 +4908,28 @@
     }
     populateStage1Form();
     initEvents();
+    initFontSizeControl();
+    initStepAccordion();
     renderPackingList();
     setupTranslator();
     checkBackendStatus();
-    // 預設進入階段 2 方便直觀感受
-    setStage(2);
+
+    // 記憶使用者上次停留在哪一個階段 (階段 1 規劃、階段 2 行程或階段 3 記帳)，避免手機閒置重載後自動跳跑
+    let savedStage = 2;
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const stored = localStorage.getItem('elite_travel_current_stage');
+        if (stored) savedStage = parseInt(stored, 10);
+      }
+    } catch (e) {}
+    setStage(savedStage);
+
+    // 雲端後端 Keep-Alive 心跳：每 8 分鐘自動 ping 一次後端，避免 Render 免費方案進入 15 分鐘無流量休眠
+    if (typeof window !== 'undefined' && typeof process === 'undefined') {
+      setInterval(() => {
+        fetch(getBackendUrl('/api/status')).catch(() => {});
+      }, 8 * 60 * 1000);
+    }
   }
 
   // 啟動
