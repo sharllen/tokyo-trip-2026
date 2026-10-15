@@ -31,7 +31,7 @@
   // 3. 末日向機場收攏，國際線提前 3.5 小時抵達機場
   // 4. 每日雙軌配備室內雨備方案 (🛡️)
   // ==========================================
-  function createTokyo9Days(startDate = "2026-10-19", hotelName = "三井花園飯店 汐留義大利街") {
+  function createTokyo9Days(startDate = "2026-10-19", hotelName = "HOTEL MYSTAYS 上野") {
     const baseDate = new Date(startDate);
     function dStr(offset) {
       const d = new Date(baseDate);
@@ -42,32 +42,32 @@
       {
         dayNum: 1,
         date: dStr(0),
-        theme: "Day 1 ｜ 抵達東京成田・汐留 Check-in 與銀座初夜漫步",
+        theme: "Day 1 ｜ 抵達東京成田・入住大本營上野與阿美橫丁散策",
         fatigueText: "約 7,500 步 (輕鬆熱身)",
         fatigueClass: "fatigue-low",
         isRainMode: false,
-        logisticsTip: "NRT 成田機場領取 Suica 西瓜卡/交通卡，大件行李先送至飯店櫃台；首日落地後2小時開始安排周邊動線。",
+        logisticsTip: "UA838 航班預計 14:45 抵達 NRT T1，出關領行李約 15:45；搭乘京成 Skyliner 直達上野僅 41 分鐘；約 16:45 抵達上野辦理入住，嚴格落實落地 2 小時後正式展開周邊輕鬆動線。",
         cultureTip: "電車內通話為失禮行為，手機請保持靜音模式；電扶梯東京一律靠左側站立。",
         safetyTip: "留意末班車時間（JR山手線約 00:30），隨身攜帶護照原件。",
         sunnySpots: [
           {
             id: "d1-s1",
-            time: "13:15",
+            time: "14:45",
             period: "下午",
-            title: "抵達東京成田機場 (NRT Terminal 1)",
-            transport: "入境檢驗、領取行李與隨身 WiFi/SIM 卡 (預估 45 分鐘)",
-            desc: "搭乘【京成 Access 特急 (往羽田/西馬込方向)】直通新橋站（約 62 分鐘，車資 ¥1,350）。",
+            title: "抵達東京成田機場第一航廈 (NRT T1)",
+            transport: "入境檢驗、領取行李與隨身 WiFi/SIM 卡 (預估 50 分鐘)",
+            desc: "搭乘【京成 Skyliner 直達特急】前往上野站（約 41 分鐘，直通大本營）。",
             category: "transport",
-            completed: true,
-            mapsQuery: "Narita International Airport Terminal 1"
+            completed: false,
+            mapsQuery: "成田国際空港 第1ターミナル"
           },
           {
             id: "d1-s2",
-            time: "15:30",
+            time: "16:45",
             period: "下午",
             title: `${hotelName} Check-in 卸行李`,
-            transport: "新橋站烏森口徒步 8 分鐘抵達飯店",
-            desc: "辦理入住、卸下厚重行李並稍作梳洗休息。大廳提供免費研磨咖啡與周邊地圖。",
+            transport: "京成上野站徒步 7~9 分鐘抵達飯店",
+            desc: "辦理入住、安置 9 天大件行李並稍作梳洗休息。",
             category: "hotel",
             completed: false,
             mapsQuery: hotelName
@@ -768,7 +768,7 @@
     "destination": "日本 東京及近郊（上野・橫濱・幕張・成田）",
     "startDate": "2026-10-19",
     "endDate": "2026-10-27",
-    "flightDept": "聯合航空 UA838 | 高雄 KHH 08:00 -> 成田 NRT 13:15 (T1)",
+    "flightDept": "聯合航空 UA838 | 高雄 KHH 09:55 -> 成田 NRT 14:45 (T1)",
     "flightReturn": "聯合航空 UA837 | 成田 NRT 17:45 -> 高雄 KHH 21:15 (T1)",
     "hotelName": "HOTEL MYSTAYS 上野 (HOTEL MYSTAYS Ueno)",
     "hotelAddress": "東京都台東區東上野5-5-13 (+81 3-3842-2461)",
@@ -807,13 +807,13 @@
       "fatigueText": "約 7,500 步 (輕鬆熱身)",
       "fatigueClass": "fatigue-low",
       "isRainMode": false,
-      "logisticsTip": "UA838 航班預計 13:15 抵達 NRT T1，出關領行李約 14:15；搭乘京成 Skyliner 直達上野僅 41 分鐘；嚴格落實落地 2 小時後展開周邊輕鬆動線。",
+      "logisticsTip": "UA838 航班預計 14:45 抵達 NRT T1，出關領行李約 15:45；搭乘京成 Skyliner 直達上野僅 41 分鐘；約 16:45 抵達上野辦理入住，嚴格落實落地 2 小時後正式展開周邊輕鬆動線。",
       "cultureTip": "日本電車內請保持手機靜音，搭乘電扶梯東京習慣靠左側站立。",
       "safetyTip": "隨身攜帶護照正本以備免稅購物使用，注意末班 Skyliner 與 JR 班次。",
       "sunnySpots": [
         {
           "id": "d1-s1",
-          "time": "13:15",
+          "time": "14:45",
           "period": "下午",
           "title": "抵達成田國際機場第一航廈 (NRT T1)",
           "transport": "搭乘 UA838 順利抵達，辦理入境與領取行李（預估 50 分鐘）",
@@ -824,7 +824,7 @@
         },
         {
           "id": "d1-s2",
-          "time": "15:15",
+          "time": "16:45",
           "period": "下午",
           "title": "入住 HOTEL MYSTAYS 上野・卸下行李休憩",
           "transport": "從京成上野站步行約 7~9 分鐘抵達飯店",
@@ -835,7 +835,7 @@
         },
         {
           "id": "d1-s3",
-          "time": "16:30",
+          "time": "17:45",
           "period": "下午",
           "title": "上野阿美橫丁 (Ameyoko) 活力市集採買",
           "transport": "從飯店步行 6 分鐘直達阿美橫丁入口",
@@ -846,7 +846,7 @@
         },
         {
           "id": "d1-s4",
-          "time": "18:30",
+          "time": "19:15",
           "period": "晚上",
           "title": "晚餐：上野道地拉麵名店（一蘭 / 麵屋武藏 武骨）",
           "transport": "阿美橫丁商圈步行 3 分鐘",
@@ -1809,18 +1809,41 @@
   let currentStage = 1;
   let selectedDayIndex = 0; // 0 for Day 1
 
-  // 本地儲存金鑰 (更新至 9 日東京版)
-  const STORAGE_KEY = 'elite_travel_planner_pro_v1_9_dining';
+  // 本地儲存金鑰 (更新至航班正確版)
+  const STORAGE_KEY = 'elite_travel_planner_pro_v2_flight_corrected';
 
   // 載入持久化狀態
   function loadStateFromStorage() {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      let stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        // 從舊版本繼承使用者自訂資料（記帳、打勾等）
+        const oldStored = localStorage.getItem('elite_travel_planner_pro_v1_9_dining');
+        if (oldStored) stored = oldStored;
+      }
       if (stored) {
         appState = JSON.parse(stored);
       }
     } catch (e) {
       console.warn('載入 LocalStorage 失敗，使用預設值', e);
+    }
+
+    // 自動校正航班資料（修復先前殘留的 08:00/13:15 或長榮舊資料）
+    if (appState && appState.trip) {
+      if (!appState.trip.flightDept || appState.trip.flightDept.includes('13:15') || appState.trip.flightDept.includes('08:00') || appState.trip.flightDept.includes('BR198')) {
+        appState.trip.flightDept = "聯合航空 UA838 | 高雄 KHH 09:55 -> 成田 NRT 14:45 (T1)";
+        if (appState.days && appState.days[0]) {
+          const d1 = appState.days[0];
+          d1.logisticsTip = "UA838 航班預計 14:45 抵達 NRT T1，出關領行李約 15:45；搭乘京成 Skyliner 直達上野僅 41 分鐘；約 16:45 抵達上野辦理入住，嚴格落實落地 2 小時後正式展開周邊輕鬆動線。";
+          if (d1.sunnySpots && d1.sunnySpots[0]) {
+            d1.sunnySpots[0].time = "14:45";
+          }
+          if (d1.sunnySpots && d1.sunnySpots[1]) {
+            d1.sunnySpots[1].time = "16:45";
+          }
+        }
+        saveStateToStorage();
+      }
     }
   }
 
@@ -3984,6 +4007,37 @@
         updateTripMembersFromInput(tripMembersInput.value);
       };
     }
+
+    // 即時雙向連動所有表單輸入欄位 (航班、住宿、旅程名稱、出發回程日期)
+    const bindLiveInput = (id, propKey, callback) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const handler = () => {
+        if (!appState.trip) appState.trip = {};
+        appState.trip[propKey] = el.value.trim();
+        saveStateToStorage();
+        if (callback) callback(el.value.trim());
+      };
+      el.oninput = handler;
+      el.onchange = handler;
+    };
+
+    bindLiveInput('flight-dept', 'flightDept', (val) => {
+      renderStage2Banner();
+      const match = val.match(/(\d{1,2}:\d{2})\s*(?:抵達|\->|>|\))/);
+      if (match && appState.days && appState.days[0] && appState.days[0].sunnySpots && appState.days[0].sunnySpots[0]) {
+        appState.days[0].sunnySpots[0].time = match[1];
+        saveStateToStorage();
+        renderStage2Timeline();
+      }
+    });
+    bindLiveInput('flight-return', 'flightReturn', () => renderStage2Banner());
+    bindLiveInput('hotel-name', 'hotelName', () => renderStage2Banner());
+    bindLiveInput('hotel-address', 'hotelAddress', () => renderStage2Banner());
+    bindLiveInput('trip-name', 'name', () => renderStage2Banner());
+    bindLiveInput('trip-destination', 'destination', () => renderStage2Banner());
+    bindLiveInput('trip-start-date', 'startDate');
+    bindLiveInput('trip-end-date', 'endDate');
 
     // 記帳區塊：同步姓名與清空按鈕
     const btnSyncMembers = document.getElementById('btn-sync-member-names');
