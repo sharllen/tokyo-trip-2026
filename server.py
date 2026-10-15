@@ -185,10 +185,10 @@ ELITE_SYSTEM_PROMPT = """你是一位擁有20年以上頂級經驗的日本自�
 }
 """
 
-MODELS_TO_TRY = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-3.5-flash"]
+MODELS_TO_TRY = ["gemini-flash-lite-latest", "gemini-flash-latest", "gemini-3.5-flash"]
 MODEL_NAME = MODELS_TO_TRY[0]
 
-def call_gemini_api(payload: dict, key: str, timeout: int = 90) -> requests.Response:
+def call_gemini_api(payload: dict, key: str, timeout: int = 15) -> requests.Response:
     last_resp = None
     for m in MODELS_TO_TRY:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent?key={key}"
@@ -298,10 +298,14 @@ def translate_text(req: TranslateRequest):
 }}"""
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"responseMimeType": "application/json", "temperature": 0.2}
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "temperature": 0.1,
+            "maxOutputTokens": 250
+        }
     }
     try:
-        resp = call_gemini_api(payload, key, timeout=30)
+        resp = call_gemini_api(payload, key, timeout=8)
         if resp.status_code != 200:
             raise HTTPException(status_code=resp.status_code, detail=f"Gemini API 錯誤: {resp.text}")
         data = resp.json()

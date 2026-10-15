@@ -3675,7 +3675,7 @@
       };
     });
 
-    // 常用旅遊會話翻譯字典
+    // 常用旅遊會話翻譯字典 (本地 0.01 秒極速快配)
     const translationDict = {
       "洋蔥": { ja: "玉ねぎ", romaji: "tamanegi" },
       "請問這道菜有加洋蔥嗎？": { ja: "この料理に玉ねぎは入っていますか？", romaji: "Kono ryōri ni tamanegi wa haitte imasu ka?", en: "Does this dish contain onions?", ko: "이 요리에 양파가 들어가 있나요?" },
@@ -3683,7 +3683,14 @@
       "可以幫我們合照一張嗎？": { ja: "写真を撮っていただけますか？", romaji: "Shashin o totte itadakemasu ka?", en: "Could you take a picture for us?", ko: "사진 한 장 찍어 주실 수 있나요?" },
       "請問洗手間在哪裡？": { ja: "お手洗いはどこですか？", romaji: "Otearai wa doko desu ka?", en: "Where is the restroom?", ko: "화장실은 어디인가요?" },
       "結帳請分開算": { ja: "お会計は別々でお願いします。", romaji: "Okaikei wa betsubetsu de onegaishimasu.", en: "Separate checks, please.", ko: "계산은 따로따로 해주세요." },
-      "請問可以使用信用卡嗎？": { ja: "クレジットカードは使えますか？", romaji: "Kurejitto kādo wa tsukaemasu ka?", en: "Do you accept credit cards?", ko: "신용카드 사용 가능한가요?" }
+      "請問可以使用信用卡嗎？": { ja: "クレジットカードは使えますか？", romaji: "Kurejitto kādo wa tsukaemasu ka?", en: "Do you accept credit cards?", ko: "신용카드 사용 가능한가요?" },
+      "請問這個多少錢？": { ja: "これはいくらですか？", romaji: "Kore wa ikura desu ka?", en: "How much is this?", ko: "이것은 얼마인가요?" },
+      "這個多少錢": { ja: "これはいくらですか？", romaji: "Kore wa ikura desu ka?", en: "How much is this?", ko: "이것은 얼마인가요?" },
+      "多少錢": { ja: "いくらですか？", romaji: "Ikura desu ka?", en: "How much is it?", ko: "얼마인가요?" },
+      "請給我收據": { ja: "レシートをいただけますか？", romaji: "Reshīto o itadakemasu ka?", en: "May I have the receipt, please?", ko: "영수증을 주시겠어요?" },
+      "請給我一杯水": { ja: "お水をいただけますか？", romaji: "Omizu o itadakemasu ka?", en: "May I have a glass of water?", ko: "물 한 잔 주시겠어요?" },
+      "不好意思借過一下": { ja: "すみません、通してください。", romaji: "Sumimasen, tōshite kudasai.", en: "Excuse me, please let me pass.", ko: "실례합니다, 지나가겠습니다." },
+      "請問有中文菜單嗎？": { ja: "中国語のメニューはありますか？", romaji: "Chūgokugo no menyū wa arimasu ka?", en: "Do you have a Chinese menu?", ko: "중국어 메뉴가 있나요?" }
     };
 
     // 2. 文字即時翻譯
@@ -3705,14 +3712,46 @@
       let transRes = "";
       let romajiRes = "";
 
-      if (btnDoTrans) btnDoTrans.textContent = "⏳ Gemini 翻譯中...";
+      // 檢查快速在地詞典 (0.01 秒極速快顯)
+      let matchedKey = null;
+      if (translationDict[query]) {
+        matchedKey = query;
+      } else {
+        const cleanQ = query.replace(/[？?！!。，, ]/g, '');
+        for (const k of Object.keys(translationDict)) {
+          const cleanK = k.replace(/[？?！!。，, ]/g, '');
+          if (cleanQ === cleanK || (cleanQ.length >= 2 && cleanK.includes(cleanQ)) || (cleanK.length >= 2 && cleanQ.includes(cleanK))) {
+            matchedKey = k;
+            break;
+          }
+        }
+      }
+
+      if (matchedKey && translationDict[matchedKey]) {
+        const item = translationDict[matchedKey];
+        transRes = item[lang] || item.ja;
+        romajiRes = item.romaji ? `${item.romaji}\n⚡ 常用會話極速快配` : '⚡ 常用會話極速快配';
+        if (outputText) outputText.textContent = transRes;
+        if (outputRomaji) outputRomaji.textContent = romajiRes;
+        if (resultBox) resultBox.classList.remove('hidden');
+        if (btnDoTrans) btnDoTrans.textContent = "✨ 即時翻譯";
+        return;
+      }
+
+      if (btnDoTrans) btnDoTrans.textContent = "⏳ Gemini 翻譯中 (約需 2~4 秒)...";
 
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 9000);
+
         const transApiRes = await fetch(getBackendUrl('/api/translate'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: query, target_lang: lang })
+          body: JSON.stringify({ text: query, target_lang: lang }),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
+
         if (transApiRes.ok) {
           const transData = await transApiRes.json();
           if (transData.ok && transData.result) {
@@ -3751,9 +3790,11 @@
 
     if (btnDoTrans) btnDoTrans.onclick = performTranslation;
 
-    // 3. 語音輸入 (Web Speech API)
+    // 3. 語音輸入 (Web Speech API 支援點擊結束)
     const btnVoice = document.getElementById('btn-voice-input');
     const voiceStatus = document.getElementById('voice-status-text');
+    let activeRecognition = null;
+    let isRecording = false;
 
     if (btnVoice) {
       btnVoice.onclick = () => {
@@ -3768,11 +3809,25 @@
           return;
         }
 
+        if (isRecording && activeRecognition) {
+          try {
+            activeRecognition.stop();
+          } catch (e) {}
+          if (voiceStatus) voiceStatus.textContent = '⌛ 正在完成語音辨識...';
+          return;
+        }
+
         try {
           const recognition = new SpeechRecognition();
           recognition.lang = 'zh-TW';
+          recognition.interimResults = false;
+          recognition.maxAlternatives = 1;
+          activeRecognition = recognition;
+          isRecording = true;
+
           btnVoice.classList.add('recording');
-          if (voiceStatus) voiceStatus.textContent = '🔴 正在聆聽您的說話...';
+          btnVoice.innerHTML = '⏹️ 說完請按此送出';
+          if (voiceStatus) voiceStatus.textContent = '🔴 正在聆聽... 說完可點擊「⏹️ 說完請按此送出」';
 
           recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
@@ -3782,17 +3837,27 @@
           };
 
           recognition.onerror = () => {
-            if (voiceStatus) voiceStatus.textContent = '語音暫不可用，請直接打字。';
+            if (voiceStatus) voiceStatus.textContent = '語音辨識未完成，請直接輸入或再試一次。';
             btnVoice.classList.remove('recording');
+            btnVoice.innerHTML = '🎤 語音輸入辨識';
+            isRecording = false;
+            activeRecognition = null;
           };
 
           recognition.onend = () => {
             btnVoice.classList.remove('recording');
+            btnVoice.innerHTML = '🎤 語音輸入辨識';
+            isRecording = false;
+            activeRecognition = null;
           };
 
           recognition.start();
         } catch (err) {
           if (voiceStatus) voiceStatus.textContent = '語音暫不可用，請直接打字。';
+          btnVoice.classList.remove('recording');
+          btnVoice.innerHTML = '🎤 語音輸入辨識';
+          isRecording = false;
+          activeRecognition = null;
         }
       };
     }
